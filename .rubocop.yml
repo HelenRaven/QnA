@@ -1,3 +1,5 @@
+require: rubocop-rails
+
 AllCops:
   Exclude:
     - 'bin/**/*'
@@ -16,6 +18,9 @@ Metrics/ClassLength:
 
 Metrics/AbcSize:
   Max: 20
+
+Metrics/BlockLength:
+  Max: 100
 
 Style/Documentation:
   Enabled: false
