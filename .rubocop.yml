@@ -1,5 +1,12 @@
 require: rubocop-rails
 
+AllCops:
+  Exclude:
+    - 'bin/**/*'
+    - 'db/**/*'
+    - 'config/**/*'
+    - 'node_modules/**/*'
+
 Layout/LineLength:
   Max: 120
 
@@ -11,6 +18,9 @@ Metrics/ClassLength:
 
 Metrics/AbcSize:
   Max: 20
+
+Metrics/BlockLength:
+  Max: 100
 
 Style/Documentation:
   Enabled: false

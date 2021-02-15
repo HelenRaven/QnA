@@ -6,21 +6,21 @@ RSpec.describe AnswersController, type: :controller do
 
   describe 'Get #show' do
     it 'renders show view' do
-      get :show, params: {id: answer}
+      get :show, params: { id: answer }
       expect(response).to render_template :show
     end
   end
 
   describe 'Get #new' do
     it 'renders new view' do
-      get :new, params: {question_id: question}
+      get :new, params: { question_id: question }
       expect(response).to render_template :new
     end
   end
 
   describe 'Get #edit' do
     it 'renders create view' do
-      get :edit, params: {id: answer}
+      get :edit, params: { id: answer }
       expect(response).to render_template :edit
     end
   end
@@ -28,7 +28,10 @@ RSpec.describe AnswersController, type: :controller do
   describe 'POST #create' do
     context 'with valid attributes' do
       it 'saves a new answer in database' do
-        expect { post :create, params: {question_id: question, answer: attributes_for(:answer) } }.to change(question.answers, :count).by(1)
+        expect do
+          post :create,
+               params: { question_id: question, answer: attributes_for(:answer) }
+        end.to change(question.answers, :count).by(1)
       end
 
       it 'redirects to show view' do
@@ -39,12 +42,15 @@ RSpec.describe AnswersController, type: :controller do
 
     context 'with invalid attributes' do
       it 'does not save the answer' do
-        expect { post :create, params: { question_id: question, answer: attributes_for(:answer, :invalid) } }.to_not change(question.answers, :count)
+        expect do
+          post :create,
+               params: { question_id: question, answer: attributes_for(:answer, :invalid) }
+        end.to_not change(question.answers, :count)
       end
 
       it 're-renders new view' do
-        post :create, params: { question_id: question, answer: attributes_for(:answer, :invalid)  }
-        expect(response).to render_template :new, params: {question_id: question}
+        post :create, params: { question_id: question, answer: attributes_for(:answer, :invalid) }
+        expect(response).to render_template :new, params: { question_id: question }
       end
     end
   end
@@ -52,7 +58,7 @@ RSpec.describe AnswersController, type: :controller do
   describe 'PATCH #update' do
     context 'with valid attributes' do
       it 'assings requested answer to @answer' do
-        patch :update, params: { id: answer, answer: attributes_for(:answer)}
+        patch :update, params: { id: answer, answer: attributes_for(:answer) }
         expect(assigns(:answer)).to eq assigns(:answer)
       end
 
@@ -64,7 +70,7 @@ RSpec.describe AnswersController, type: :controller do
       end
 
       it 'redirects to updated answer show view' do
-        patch :update, params: { id: answer, answer: attributes_for(:answer)}
+        patch :update, params: { id: answer, answer: attributes_for(:answer) }
         expect(response).to redirect_to assigns(:answer)
       end
     end
@@ -87,13 +93,12 @@ RSpec.describe AnswersController, type: :controller do
     let!(:answer) { create(:answer) }
 
     it 'deletes the answer' do
-      expect { delete :destroy, params: {id: answer}}.to change(Answer, :count).by(-1)
+      expect { delete :destroy, params: { id: answer } }.to change(Answer, :count).by(-1)
     end
 
     it 'redirects to index' do
-      delete :destroy, params: {id: answer}
+      delete :destroy, params: { id: answer }
       expect(response).to redirect_to question_path(answer.question)
     end
   end
-
 end
