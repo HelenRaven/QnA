@@ -18,25 +18,23 @@ RSpec.describe QuestionsController, type: :controller do
   end
 
   describe 'Get #show' do
-    before { get :show, params: {id: question} }
 
     it 'renders show view' do
+      get :show, params: {id: question}
       expect(response).to render_template :show
     end
   end
 
   describe 'Get #new' do
-    before { get :new }
-
     it 'renders new view' do
+      get :new
       expect(response).to render_template :new
     end
   end
 
   describe 'Get #edit' do
-    before { get :edit, params: {id: question} }
-
     it 'renders create view' do
+      get :edit, params: {id: question}
       expect(response).to render_template :edit
     end
   end
