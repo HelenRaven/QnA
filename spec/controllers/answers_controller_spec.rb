@@ -15,14 +15,14 @@ RSpec.describe AnswersController, type: :controller do
   describe 'Get #new' do
     it 'renders new view' do
       login(user)
-      get :new, params: { question_id: question }
+      get :new, params: { question_id: question, user_id: user }
       expect(response).to render_template :new
     end
   end
 
   describe 'Get #edit' do
     it 'renders create view' do
-      login(user)
+      login(answer.user)
       get :edit, params: { id: answer }
       expect(response).to render_template :edit
     end
@@ -61,7 +61,7 @@ RSpec.describe AnswersController, type: :controller do
   end
 
   describe 'PATCH #update' do
-    before { login(user) }
+    before { login(answer.user) }
 
     context 'with valid attributes' do
       it 'assings requested answer to @answer' do
@@ -97,8 +97,7 @@ RSpec.describe AnswersController, type: :controller do
   end
 
   describe 'DELETE #destroy' do
-    before { login(user) }
-    let!(:answer) { create(:answer) }
+    before { login(answer.user) }
 
     it 'deletes the answer' do
       expect { delete :destroy, params: { id: answer } }.to change(Answer, :count).by(-1)

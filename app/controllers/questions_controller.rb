@@ -14,7 +14,7 @@ class QuestionsController < ApplicationController
   def edit; end
 
   def create
-    @question = Question.new(question_params)
+    @question = current_user.questions.new(question_params)
 
     if @question.save
       redirect_to @question, notice: 'Your question successfully created.'
@@ -24,7 +24,7 @@ class QuestionsController < ApplicationController
   end
 
   def update
-    if question.update(question_params)
+    if author? && question.update(question_params)
       redirect_to @question
     else
       render :edit
@@ -32,17 +32,25 @@ class QuestionsController < ApplicationController
   end
 
   def destroy
-    question.destroy
-    redirect_to questions_path
+    if author?
+      question.destroy
+      redirect_to questions_path, notice: 'Your question was successfully deleted.'
+    else
+      flash.now[:notice] = "You cant't delete someone else's question"
+    end
   end
 
   private
+
+  def author?
+    current_user == question.user
+  end
 
   def question
     @question ||= params[:id] ? Question.find(params[:id]) : Question.new
   end
 
-  helper_method :question
+  helper_method :question, :author?
 
   def question_params
     params.require(:question).permit(:title, :body)

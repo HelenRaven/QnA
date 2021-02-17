@@ -8,7 +8,8 @@ class AnswersController < ApplicationController
   def edit; end
 
   def create
-    @answer = question.answers.new(answer_params)
+    @answer = current_user.answers.new(answer_params)
+    @answer.question = question
 
     if @answer.save
       flash[:notice] = 'Your answer successfully created.'
@@ -20,7 +21,7 @@ class AnswersController < ApplicationController
   end
 
   def update
-    if answer.update(answer_params)
+    if author? && answer.update(answer_params)
       redirect_to answer
     else
       render :edit
@@ -28,11 +29,19 @@ class AnswersController < ApplicationController
   end
 
   def destroy
-    answer.destroy
-    redirect_to answer.question
+    if author?
+      answer.destroy
+      redirect_to answer.question, notice: 'Your answer was successfully deleted.'
+    else
+      flash.now[:notice] = "You cant't delete someone else's question"
+    end
   end
 
   private
+
+  def author?
+    current_user == answer.user
+  end
 
   def answer
     @answer ||= params[:id] ? Answer.find(params[:id]) : question.answers.new
@@ -42,7 +51,7 @@ class AnswersController < ApplicationController
     @question ||= Question.find(params[:question_id])
   end
 
-  helper_method :answer, :question
+  helper_method :answer, :question, :author?
 
   def answer_params
     params.require(:answer).permit(:body)

@@ -1,3 +1,6 @@
+-if author?
+  = link_to 'Delete answer', answer_path(answer), method: :delete
+
 h1 = answer.question.title
 
 h2 = answer.body
