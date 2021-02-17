@@ -1,11 +1,10 @@
 require 'rails_helper'
 
-feature 'User can view list of questions', %q{
+feature 'User can view list of questions', "
   In order to find a suitable question
   As an User
   I'd like to be able to view list of questions
-} do
-
+" do
   given!(:questions) { create_list(:question, 5) }
 
   scenario 'User view all questions' do
@@ -14,5 +13,4 @@ feature 'User can view list of questions', %q{
     expect(page).to have_content 'MyString'
     expect(page).to have_content 'MyText'
   end
-
 end

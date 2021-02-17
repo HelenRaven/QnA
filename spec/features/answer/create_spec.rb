@@ -1,11 +1,10 @@
 require 'rails_helper'
 
-feature 'User can create answer', %q{
+feature 'User can create answer', "
   In order to help another user and community
   As an User
   I'd like to be able to post an answer to a question
-} do
-
+" do
   given(:user) { create(:user) }
   given(:question) { create(:question) }
 

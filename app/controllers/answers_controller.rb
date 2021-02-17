@@ -11,11 +11,11 @@ class AnswersController < ApplicationController
     @answer = current_user.answers.new(answer_params)
     @answer.question = question
 
-    if @answer.save
-      flash[:notice] = 'Your answer successfully created.'
-    else
-      flash[:notice] = "Answer can't be blank."
-    end
+    flash[:notice] = if @answer.save
+                       'Your answer successfully created.'
+                     else
+                       "Answer can't be blank."
+                     end
 
     redirect_to @answer.question
   end
