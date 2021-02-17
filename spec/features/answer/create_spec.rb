@@ -19,7 +19,6 @@ feature 'User can create answer', %q{
 
   scenario 'User post an answer with errors' do
     click_on 'Post answer'
-    save_and_open_page
     expect(page).to have_content "Answer can't be blank."
   end
 end
