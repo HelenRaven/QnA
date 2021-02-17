@@ -11,7 +11,6 @@ feature 'User can view list of questions', %q{
   scenario 'User view all questions' do
     visit questions_path
 
-    save_and_open_page
     expect(page).to have_content 'MyString'
     expect(page).to have_content 'MyText'
   end

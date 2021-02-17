@@ -9,10 +9,12 @@ class AnswersController < ApplicationController
     @answer = question.answers.new(answer_params)
 
     if @answer.save
-      redirect_to @answer
+      flash[:notice] = 'Your answer successfully created.'
     else
-      render :new
+      flash[:notice] = "Answer can't be blank."
     end
+
+    redirect_to @answer.question
   end
 
   def update

@@ -6,6 +6,8 @@ feature 'User can create question', %q{
   I'd like to be able to ask the question
 } do
 
+  given!(:questions) { create_list(:question, 5) }
+
   background do
     visit questions_path
     click_on 'Ask question'
