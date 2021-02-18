@@ -1,6 +1,10 @@
 FactoryBot.define do
+  sequence :answer_body do |n|
+    "Answer#{n}"
+  end
+
   factory :answer do
-    body { "MyAnswer" }
+    body { :answer_body }
     question
     user
 

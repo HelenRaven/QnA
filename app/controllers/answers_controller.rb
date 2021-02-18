@@ -13,11 +13,17 @@ class AnswersController < ApplicationController
     @answer = current_user.answers.new(answer_params)
     @answer.question = question
 
-    flash[:notice] = if @answer.save
-                       'Your answer successfully created.'
-                     else
-                       "Answer can't be blank."
-                     end
+    # не могу придумать, каким способом передать ошибку несохраненного ответа в show вопроса
+    error_message = ''
+
+    if @answer.save
+      flash[:notice] = 'Your answer successfully created.'
+    else
+      @answer.errors.full_messages.each do |message|
+        error_message += "#{message}\\n"
+      end
+      flash[:notice] = error_message
+    end
 
     redirect_to @answer.question
   end

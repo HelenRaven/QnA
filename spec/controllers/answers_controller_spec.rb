@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe AnswersController, type: :controller do
   let(:answer)   { create(:answer) }
+  let(:old_body) { answer.body }
   let(:question) { create(:question) }
   let(:user)     { create(:user) }
 
@@ -133,10 +134,10 @@ RSpec.describe AnswersController, type: :controller do
 
       context 'with invalid attributes' do
         before { patch :update, params: { id: answer, answer: attributes_for(:answer, :invalid) } }
+
         it 'does not change answer' do
           answer.reload
-
-          expect(answer.body).to eq 'MyAnswer'
+          expect(answer.body).to eq old_body
         end
 
         it 're-renders edit view' do
@@ -153,7 +154,7 @@ RSpec.describe AnswersController, type: :controller do
           patch :update, params: { id: answer, answer: { body: 'new body' } }
           answer.reload
 
-          expect(answer.body).to eq 'MyAnswer'
+          expect(answer.body).to eq old_body
         end
 
         it 'redirects to show view' do
@@ -164,10 +165,11 @@ RSpec.describe AnswersController, type: :controller do
 
       context 'with invalid attributes' do
         before { patch :update, params: { id: answer, answer: attributes_for(:answer, :invalid) } }
+
         it 'does not change answer' do
           answer.reload
 
-          expect(answer.body).to eq 'MyAnswer'
+          expect(answer.body).to eq old_body
         end
 
         it 'redirects to show view' do
@@ -182,7 +184,7 @@ RSpec.describe AnswersController, type: :controller do
           patch :update, params: { id: answer, answer: { body: 'new body' } }
           answer.reload
 
-          expect(answer.body).to_not eq 'new body'
+          expect(answer.body).to eq old_body
         end
 
         it 'redirects to sign in view' do
@@ -196,7 +198,7 @@ RSpec.describe AnswersController, type: :controller do
         it 'does not change answer' do
           answer.reload
 
-          expect(answer.body).to eq 'MyAnswer'
+          expect(answer.body).to eq old_body
         end
 
         it 'redirects to sign in view' do

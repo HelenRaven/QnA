@@ -21,9 +21,9 @@ feature 'User can create answer', "
       expect(page).to have_content 'Your answer successfully created.'
     end
 
-    scenario 'post an answer with errors' do
+    scenario 'post an empty answer' do
       click_on 'Post answer'
-      expect(page).to have_content "Answer can't be blank."
+      expect(page).to have_content "Body can't be blank"
     end
   end
 

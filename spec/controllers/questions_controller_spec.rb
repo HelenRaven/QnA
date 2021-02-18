@@ -1,8 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe QuestionsController, type: :controller do
-  let(:question) { create(:question) }
-  let(:user) { create(:user) }
+  let(:question)  { create(:question) }
+  let(:old_title) { question.title }
+  let(:old_body)  { question.body }
+  let(:user)      { create(:user) }
 
   describe 'GET #index' do
     let(:questions) { create_list(:question, 3) }
@@ -153,8 +155,8 @@ RSpec.describe QuestionsController, type: :controller do
         it 'does not change question' do
           question.reload
 
-          expect(question.title).to eq 'MyString'
-          expect(question.body).to eq 'MyText'
+          expect(question.title).to eq old_title
+          expect(question.body).to eq old_body
         end
 
         it 're-renders edit view' do
@@ -171,8 +173,8 @@ RSpec.describe QuestionsController, type: :controller do
           patch :update, params: { id: question, question: { title: 'new title', body: 'new body' } }
           question.reload
 
-          expect(question.title).to eq 'MyString'
-          expect(question.body).to eq 'MyText'
+          expect(question.title).to eq old_title
+          expect(question.body).to eq old_body
         end
 
         it 'redirects to show view' do
@@ -187,8 +189,8 @@ RSpec.describe QuestionsController, type: :controller do
         it 'does not change question' do
           question.reload
 
-          expect(question.title).to eq 'MyString'
-          expect(question.body).to eq 'MyText'
+          expect(question.title).to eq old_title
+          expect(question.body).to eq old_body
         end
 
         it 'redirects to show view' do

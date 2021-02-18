@@ -10,7 +10,9 @@ feature 'User can view list of questions', "
   scenario 'User view all questions' do
     visit questions_path
 
-    expect(page).to have_content 'MyString'
-    expect(page).to have_content 'MyText'
+    questions.each do |question|
+      expect(page).to have_content question.title
+      expect(page).to have_content question.body
+    end
   end
 end
