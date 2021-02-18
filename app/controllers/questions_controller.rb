@@ -12,9 +12,7 @@ class QuestionsController < ApplicationController
   def new; end
 
   def edit
-    unless current_user.author?(question)
-      render :show, notice: "You can't edit someone else's question"
-    end
+    render :show, notice: "You can't edit someone else's question" unless current_user.author?(question)
   end
 
   def create

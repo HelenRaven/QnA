@@ -6,6 +6,7 @@ AllCops:
     - 'db/**/*'
     - 'config/**/*'
     - 'node_modules/**/*'
+    - 'spec/rails_helper.rb'
 
 Layout/LineLength:
   Max: 120
@@ -20,7 +21,7 @@ Metrics/AbcSize:
   Max: 20
 
 Metrics/BlockLength:
-  Max: 100
+  Max: 250
 
 Style/Documentation:
   Enabled: false

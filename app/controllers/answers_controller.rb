@@ -6,9 +6,7 @@ class AnswersController < ApplicationController
   def new; end
 
   def edit
-    unless current_user.author?(answer)
-      render :show, notice: "You can't edit someone else's answer"
-    end
+    render :show, notice: "You can't edit someone else's answer" unless current_user.author?(answer)
   end
 
   def create
