@@ -6,6 +6,7 @@ feature 'Author can delete his question', "
   I'd like to be able to delete my question
 " do
   given(:question) { create(:question) }
+  given(:user) { create(:user) }
 
   scenario 'Authenticated author try to delete his question' do
     sign_in(question.user)
@@ -13,5 +14,18 @@ feature 'Author can delete his question', "
     click_on 'Delete question'
 
     expect(page).to have_content 'Your question was successfully deleted.'
+  end
+
+  scenario 'Authenticated not author user try to delete question' do
+    sign_in(user)
+    visit question_path(question)
+
+    expect(page).to_not have_content 'Delete question'
+  end
+
+  scenario 'Unauthenticated user try to delete question' do
+    visit question_path(question)
+
+    expect(page).to_not have_content 'Delete question'
   end
 end
