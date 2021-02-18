@@ -69,6 +69,7 @@ RSpec.describe QuestionsController, type: :controller do
 
   describe 'PATCH #update' do
     before { login(question.user) }
+
     context 'with valid attributes' do
       it 'assings requested questions to @question' do
         patch :update, params: { id: question, question: attributes_for(:question) }
@@ -82,6 +83,7 @@ RSpec.describe QuestionsController, type: :controller do
         expect(question.title).to eq 'new title'
         expect(question.body).to eq 'new body'
       end
+
       it 'redirects to updated question show view' do
         patch :update, params: { id: question, question: attributes_for(:question) }
         expect(response).to redirect_to question
@@ -90,6 +92,7 @@ RSpec.describe QuestionsController, type: :controller do
 
     context 'with invalid attributes' do
       before { patch :update, params: { id: question, question: attributes_for(:question, :invalid) } }
+
       it 'does not change question' do
         question.reload
 

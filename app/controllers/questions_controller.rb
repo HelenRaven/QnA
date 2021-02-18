@@ -24,7 +24,7 @@ class QuestionsController < ApplicationController
   end
 
   def update
-    if author? && question.update(question_params)
+    if current_user.author?(question) && question.update(question_params)
       redirect_to @question
     else
       render :edit
@@ -32,7 +32,7 @@ class QuestionsController < ApplicationController
   end
 
   def destroy
-    if author?
+    if current_user.author?(question)
       question.destroy
       redirect_to questions_path, notice: 'Your question was successfully deleted.'
     else
@@ -42,15 +42,11 @@ class QuestionsController < ApplicationController
 
   private
 
-  def author?
-    current_user == question.user
-  end
-
   def question
     @question ||= params[:id] ? Question.find(params[:id]) : Question.new
   end
 
-  helper_method :question, :author?
+  helper_method :question
 
   def question_params
     params.require(:question).permit(:title, :body)
