@@ -26,10 +26,16 @@ RSpec.describe AnswersController, type: :controller do
   end
 
   describe 'Get #edit' do
-    it 'renders create view for authorized user' do
+    it 'renders create view for authorized author' do
       login(answer.user)
       get :edit, params: { id: answer }
       expect(response).to render_template :edit
+    end
+
+    it 'renders question view for authorized user' do
+      login(user)
+      get :edit, params: { id: answer }
+      expect(response).to render_template :show
     end
 
     it 'renders sign in view for unauthorized user' do
@@ -39,7 +45,7 @@ RSpec.describe AnswersController, type: :controller do
   end
 
   describe 'POST #create' do
-    context 'for authorized user' do
+    context 'Authorized user' do
       before { login(user) }
 
       context 'with valid attributes ' do
@@ -71,7 +77,7 @@ RSpec.describe AnswersController, type: :controller do
       end
     end
 
-    context 'for unauthorized user' do
+    context 'Unauthorized user' do
       context 'with valid attributes ' do
         it "doesn't saves a new answer in database" do
           expect do
@@ -103,7 +109,7 @@ RSpec.describe AnswersController, type: :controller do
   end
 
   describe 'PATCH #update' do
-    context 'authorized author' do
+    context 'Authorized author' do
       before { login(answer.user) }
 
       context 'with valid attributes' do
@@ -139,7 +145,7 @@ RSpec.describe AnswersController, type: :controller do
       end
     end
 
-    context 'authorized not author user' do
+    context 'Authorized user' do
       before { login(user) }
 
       context 'with valid attributes' do
@@ -147,12 +153,12 @@ RSpec.describe AnswersController, type: :controller do
           patch :update, params: { id: answer, answer: { body: 'new body' } }
           answer.reload
 
-          expect(answer.body).to_not eq 'new body'
+          expect(answer.body).to eq 'MyAnswer'
         end
 
-        it 'redirects to edit view' do
+        it 'redirects to show view' do
           patch :update, params: { id: answer, answer: attributes_for(:answer) }
-          expect(response).to render_template :edit
+          expect(response).to render_template :show
         end
       end
 
@@ -164,8 +170,8 @@ RSpec.describe AnswersController, type: :controller do
           expect(answer.body).to eq 'MyAnswer'
         end
 
-        it 're-renders edit view' do
-          expect(response).to render_template :edit
+        it 'redirects to show view' do
+          expect(response).to render_template :show
         end
       end
     end

@@ -5,7 +5,11 @@ class AnswersController < ApplicationController
 
   def new; end
 
-  def edit; end
+  def edit
+    unless current_user.author?(answer)
+      render :show, notice: "You can't edit someone else's answer"
+    end
+  end
 
   def create
     @answer = current_user.answers.new(answer_params)
@@ -21,10 +25,14 @@ class AnswersController < ApplicationController
   end
 
   def update
-    if current_user.author?(answer) && answer.update(answer_params)
-      redirect_to answer
+    if current_user.author?(answer)
+      if answer.update(answer_params)
+        redirect_to answer
+      else
+        render :edit
+      end
     else
-      render :edit
+      render :show
     end
   end
 
@@ -33,7 +41,7 @@ class AnswersController < ApplicationController
       answer.destroy
       flash[:notice] = 'Your answer was successfully deleted.'
     else
-      flash[:notice] = "You cant't delete someone else's question"
+      flash[:notice] = "You cant't delete someone else's answer"
     end
     redirect_to answer.question
   end

@@ -11,7 +11,11 @@ class QuestionsController < ApplicationController
 
   def new; end
 
-  def edit; end
+  def edit
+    unless current_user.author?(question)
+      render :show, notice: "You can't edit someone else's question"
+    end
+  end
 
   def create
     @question = current_user.questions.new(question_params)
@@ -24,20 +28,25 @@ class QuestionsController < ApplicationController
   end
 
   def update
-    if current_user.author?(question) && question.update(question_params)
-      redirect_to @question
+    if current_user.author?(question)
+      if question.update(question_params)
+        redirect_to question
+      else
+        render :edit
+      end
     else
-      render :edit
+      render :show
     end
   end
 
   def destroy
     if current_user.author?(question)
       question.destroy
-      redirect_to questions_path, notice: 'Your question was successfully deleted.'
+      flash[:notice] = 'Your question was successfully deleted.'
     else
-      flash.now[:notice] = "You cant't delete someone else's question"
+      flash[:notice] = "You cant't delete someone else's question"
     end
+    redirect_to questions_path
   end
 
   private
