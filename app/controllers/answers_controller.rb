@@ -13,19 +13,11 @@ class AnswersController < ApplicationController
     @answer = current_user.answers.new(answer_params)
     @answer.question = question
 
-    # не могу придумать, каким способом передать ошибку несохраненного ответа в show вопроса
-    error_message = ''
-
     if @answer.save
-      flash[:notice] = 'Your answer successfully created.'
+      redirect_to @answer.question, notice: "#{@answer.user.email}Your answer successfully created."
     else
-      @answer.errors.full_messages.each do |message|
-        error_message += "#{message}\\n"
-      end
-      flash[:notice] = error_message
+      render 'questions/show'
     end
-
-    redirect_to @answer.question
   end
 
   def update

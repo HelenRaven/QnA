@@ -5,26 +5,16 @@ feature 'User can view question with list of answers', "
   As an User
   I'd like to be able to view list of answers
 " do
-  given(:questions) { create_list(:question, 3) }
-  given(:user) { create(:user) }
+  given(:question) { create(:question_with_answers) }
 
   scenario 'User view question with list of answers' do
-    questions.each do |question|
-      sign_in(user)
+    visit question_path(question)
 
-      3.times do |i|
-        post_answer(question, "#{question.title}Answer#{i}")
-      end
+    expect(page).to have_content question.title
+    expect(page).to have_content question.body
 
-      sign_out
-
-      visit question_path(question)
-
-      expect(page).to have_content question.title
-      expect(page).to have_content question.body
-      3.times do |i|
-        expect(page).to have_content "#{question.title}Answer#{i}"
-      end
+    question.answers.each do |answer|
+      expect(page).to have_content answer.body
     end
   end
 end
