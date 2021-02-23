@@ -25,7 +25,7 @@ feature 'Author can delete his answer', "
   end
 
   scenario 'Unauthenticated user try to delete answer' do
-    visit answer_path(answer)
+    visit question_path(answer.question)
 
     expect(page).to_not have_link 'Delete answer'
   end

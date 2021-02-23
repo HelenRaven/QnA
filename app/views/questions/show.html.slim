@@ -4,14 +4,13 @@
 h1= @question.title
 p= @question.body
 
-= render 'shared/errors', resource: @answer
+.answers
+  = render @question.answers
 
-= form_with model: [@question, @answer], local: true  do |f|
+.answer-errors
+  = render 'shared/errors', resource: @answer
+
+= form_with model: [@question, @answer], local: false do |f|
   = f.label :body
   = f.text_area :body
   = f.submit 'Post answer'
-
-table
-  tr
-    th Answers
-    = render @question.answers

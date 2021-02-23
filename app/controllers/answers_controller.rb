@@ -1,23 +1,15 @@
 class AnswersController < ApplicationController
   before_action :authenticate_user!, except: %i[show]
 
-  def show; end
-
-  def new; end
-
   def edit
-    render :show, notice: "You can't edit someone else's answer" unless current_user.author?(answer)
+    redirect_to answer.question, notice: "You can't edit someone else's answer" unless current_user.author?(answer)
   end
 
   def create
     @answer = current_user.answers.new(answer_params)
     @answer.question = question
+    @answer.save
 
-    if @answer.save
-      redirect_to @answer.question, notice: "#{@answer.user.email}Your answer successfully created."
-    else
-      render 'questions/show'
-    end
   end
 
   def update
@@ -28,7 +20,7 @@ class AnswersController < ApplicationController
         render :edit
       end
     else
-      render :show
+      redirect_to answer.question
     end
   end
 

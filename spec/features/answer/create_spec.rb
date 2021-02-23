@@ -8,7 +8,7 @@ feature 'User can create answer', "
   given(:user) { create(:user) }
   given(:question) { create(:question) }
 
-  describe 'Authenticated user' do
+  describe 'Authenticated user', js: true do
     background do
       sign_in(user)
       visit question_path(question)
@@ -18,7 +18,10 @@ feature 'User can create answer', "
       fill_in 'Body', with: 'some answer'
       click_on 'Post answer'
 
-      expect(page).to have_content 'Your answer successfully created.'
+      expect(current_path).to eq question_path(question)
+      within '.answers' do
+        expect(page).to have_content 'some answer'
+      end
     end
 
     scenario 'post an empty answer' do

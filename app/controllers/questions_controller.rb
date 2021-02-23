@@ -1,12 +1,14 @@
 class QuestionsController < ApplicationController
   before_action :authenticate_user!, except: %i[index show]
+  helper_method :question
 
   def index
     @questions = Question.all
   end
 
   def show
-    @answer ||= question.answers.new
+    @answer = Answer.new
+    question
   end
 
   def new; end
@@ -52,8 +54,6 @@ class QuestionsController < ApplicationController
   def question
     @question ||= params[:id] ? Question.find(params[:id]) : Question.new
   end
-
-  helper_method :question
 
   def question_params
     params.require(:question).permit(:title, :body)
