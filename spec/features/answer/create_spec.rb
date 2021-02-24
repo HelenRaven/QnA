@@ -15,7 +15,7 @@ feature 'User can create answer', "
     end
 
     scenario 'post an answer' do
-      fill_in 'Body', with: 'some answer'
+      fill_in 'Your answer', with: 'some answer'
       click_on 'Post answer'
 
       expect(current_path).to eq question_path(question)

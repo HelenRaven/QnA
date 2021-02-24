@@ -14,6 +14,7 @@ global.$ = global.jQuery = jQuery;
 window.$ = window.jQuery = jQuery;
 
 require("packs/utilities/answers")
+require("packs/utilities/questions")
 
 Rails.start()
 Turbolinks.start()
