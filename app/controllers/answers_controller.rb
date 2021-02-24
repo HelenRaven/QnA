@@ -1,5 +1,5 @@
 class AnswersController < ApplicationController
-  before_action :authenticate_user!, except: %i[show]
+  before_action :authenticate_user!
 
   def edit
     redirect_to answer.question, notice: "You can't edit someone else's answer" unless current_user.author?(answer)
@@ -9,19 +9,15 @@ class AnswersController < ApplicationController
     @answer = current_user.answers.new(answer_params)
     @answer.question = question
     @answer.save
-
   end
 
   def update
-    if current_user.author?(answer)
-      if answer.update(answer_params)
-        redirect_to answer
-      else
-        render :edit
-      end
-    else
-      redirect_to answer.question
+    @answer = Answer.find(params[:id])
+    @question = @answer.question
+    if current_user.author?(@answer)
+      @answer.update(answer_params)
     end
+     # redirect_to @answer.question
   end
 
   def destroy

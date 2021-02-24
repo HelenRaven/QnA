@@ -5,7 +5,7 @@ feature 'User can create answer', "
   As an User
   I'd like to be able to post an answer to a question
 " do
-  given(:user) { create(:user) }
+  given(:user)     { create(:user) }
   given(:question) { create(:question) }
 
   describe 'Authenticated user', js: true do
@@ -19,6 +19,7 @@ feature 'User can create answer', "
       click_on 'Post answer'
 
       expect(current_path).to eq question_path(question)
+
       within '.answers' do
         expect(page).to have_content 'some answer'
       end
