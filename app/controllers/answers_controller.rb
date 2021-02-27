@@ -13,15 +13,11 @@ class AnswersController < ApplicationController
   end
 
   def update
-    if current_user.author?(answer)
-      answer.update(answer_params)
-    end
+    answer.update(answer_params) if current_user.author?(answer)
   end
 
   def best
-    if current_user.author?(question)
-      answer.mark_as_best
-    end
+    answer.mark_as_best if current_user.author?(question)
   end
 
   def destroy

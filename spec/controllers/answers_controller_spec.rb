@@ -175,7 +175,7 @@ RSpec.describe AnswersController, type: :controller do
         end
 
         it 'redirects to update view' do
-         expect(response).to render_template :update
+          expect(response).to render_template :update
         end
       end
     end

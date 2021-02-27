@@ -7,7 +7,7 @@ feature 'User can edit his answer', "
 " do
   given!(:user)     { create(:user) }
   given!(:question) { create(:question) }
-  given!(:answer)   { create(:answer, question: question)}
+  given!(:answer)   { create(:answer, question: question) }
 
   describe 'Authenticated author', js: true do
     background do

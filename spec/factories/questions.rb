@@ -11,7 +11,7 @@ FactoryBot.define do
     title
     body
     user
-    best_answer {nil}
+    best_answer { nil }
 
     trait :invalid do
       title { nil }
@@ -23,7 +23,7 @@ FactoryBot.define do
 
     factory :question_with_answers do
       transient do
-        answers_count {5}
+        answers_count { 5 }
       end
 
       after(:create) do |question, evaluator|

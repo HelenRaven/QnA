@@ -4,7 +4,7 @@ class Answer < ApplicationRecord
 
   validates :body, presence: true
 
-  def mark_as_best()
+  def mark_as_best
     question.best_answer = self
     question.save
   end

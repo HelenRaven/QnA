@@ -5,11 +5,10 @@ feature 'Author of question can choose the best answer', "
   As an question author
   I'd like to be able to check best answer
 " do
-
   given(:user)     { create(:user) }
   given(:question) { create(:question_with_answers, answers_count: 5) }
-  given(:question_with_best) { create(:question_with_answers, :with_best_answer, answers_count: 5 ) }
-  given(:answer)   { create(:answer, question: question_with_best) }
+  given(:question_with_best) { create(:question_with_answers, :with_best_answer, answers_count: 5) }
+  given(:answer) { create(:answer, question: question_with_best) }
 
   describe 'Authorized question author', js: true do
     scenario 'choose the best answer' do
@@ -40,7 +39,6 @@ feature 'Author of question can choose the best answer', "
 
       question_with_best.reload
       expect(question_with_best.best_answer).to eq question_with_best.answers.last
-
     end
   end
 
