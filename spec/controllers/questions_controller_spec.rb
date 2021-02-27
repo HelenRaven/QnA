@@ -31,7 +31,7 @@ RSpec.describe QuestionsController, type: :controller do
     end
 
     it 'assigns new answer for question' do
-      expect(assigns(:answer)).to be_a_new(Answer)
+      expect(assigns(:new_answer)).to be_a_new(Answer)
     end
   end
 

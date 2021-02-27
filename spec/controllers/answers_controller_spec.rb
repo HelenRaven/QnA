@@ -1,11 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe AnswersController, type: :controller do
-  let(:answer)   { create(:answer) }
+  let!(:user)     { create(:user) }
+  let!(:question) { create(:question) }
+  let!(:answer)   { create(:answer, question: question) }
   let(:old_body) { answer.body }
-  let(:question) { create(:question) }
-  let(:user)     { create(:user) }
-
+  let(:question_w) { create(:question, :with_best_answer, user: user) }
 
   describe 'Get #edit' do
     it 'renders edit view for authorized author' do
@@ -23,6 +23,37 @@ RSpec.describe AnswersController, type: :controller do
     it 'renders sign in view for unauthorized user' do
       get :edit, params: { id: answer }
       expect(response).to redirect_to new_user_session_path
+    end
+  end
+
+  describe 'PATCH #best' do
+    context 'Authorized question author' do
+      it 'saves best answer in database' do
+        login(question.user)
+        patch :best, params: { id: answer }, format: :js
+
+        answer.reload
+        expect(answer.question.best_answer).to eq answer
+      end
+    end
+
+    context 'Authorized user' do
+      it 'not saves best answer in database' do
+        login(user)
+        patch :best, params: { id: answer }, format: :js
+
+        answer.reload
+        expect(answer.question.best_answer).to_not eq answer
+      end
+    end
+
+    context 'Unauthorized user' do
+      it 'not saves best answer in database' do
+        patch :best, params: { id: answer }, format: :js
+
+        answer.reload
+        expect(answer.question.best_answer).to_not eq answer
+      end
     end
   end
 
@@ -184,12 +215,12 @@ RSpec.describe AnswersController, type: :controller do
       before { login(answer.user) }
 
       it 'deletes the answer' do
-        expect { delete :destroy, params: { id: answer } }.to change(Answer, :count).by(-1)
+        expect { delete :destroy, params: { id: answer }, format: :js }.to change(Answer, :count).by(-1)
       end
 
-      it 'redirects to question' do
-        delete :destroy, params: { id: answer }
-        expect(response).to redirect_to question_path(answer.question)
+      it 'render destroy view' do
+        delete :destroy, params: { id: answer }, format: :js
+        expect(response).to render_template :destroy
       end
     end
 
@@ -198,12 +229,12 @@ RSpec.describe AnswersController, type: :controller do
       before { login(user) }
 
       it 'not deletes the answer' do
-        expect { delete :destroy, params: { id: answer } }.to_not change(Answer, :count)
+        expect { delete :destroy, params: { id: answer }, format: :js }.to_not change(Answer, :count)
       end
 
-      it 'redirects to question' do
-        delete :destroy, params: { id: answer }
-        expect(response).to redirect_to question_path(answer.question)
+      it 'render destroy view' do
+        delete :destroy, params: { id: answer }, format: :js
+        expect(response).to render_template :destroy
       end
     end
 
@@ -211,12 +242,12 @@ RSpec.describe AnswersController, type: :controller do
       let!(:answer) { create(:answer) }
 
       it 'not deletes the answer' do
-        expect { delete :destroy, params: { id: answer } }.to_not change(Answer, :count)
+        expect { delete :destroy, params: { id: answer }, format: :js }.to_not change(Answer, :count)
       end
 
       it 'redirects to sign in view' do
-        delete :destroy, params: { id: answer }
-        expect(response).to redirect_to new_user_session_path
+        delete :destroy, params: { id: answer }, format: :js
+        should respond_with(401)
       end
     end
   end
