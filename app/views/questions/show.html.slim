@@ -4,6 +4,11 @@
 h1= @question.title
 p= @question.body
 
+- if @question.files.attached?
+  - @question.files.each do |file|
+    p= link_to file.filename.to_s, url_for(file)
+
+
 .answers
   -if @question.best_answer
     = render partial: 'answers/best_answer', object: @question.best_answer

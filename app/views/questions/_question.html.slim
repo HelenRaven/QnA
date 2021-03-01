@@ -1,6 +1,6 @@
 p
   b= question.title
-  p= question.body
+  p= link_to question.body, question_path(question)
 
   -if current_user&.author?(question)
 
