@@ -18,6 +18,10 @@ p= @question.body
   = render 'shared/errors', resource: @new_answer
 
 = form_with model: [@question, @new_answer], local: false, class: 'new-answer' do |f|
-  = f.label :body, 'Your answer'
-  = f.text_area :body
-  = f.submit 'Post answer'
+  p
+    = f.label :body, 'Your answer'
+    = f.text_area :body
+  p
+    = f.label :files
+    = f.file_field :files, multiple: true
+  p= f.submit 'Post answer'

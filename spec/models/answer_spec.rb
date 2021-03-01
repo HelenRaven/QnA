@@ -8,6 +8,10 @@ RSpec.describe Answer, type: :model do
   it { should belong_to :user }
   it { should validate_presence_of :body }
 
+  it 'has many attached files' do
+    expect(Answer.new.files).to be_an_instance_of(ActiveStorage::Attached::Many)
+  end
+
   describe '#mark_as_best' do
     before do
       answer.mark_as_best
