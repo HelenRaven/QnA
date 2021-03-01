@@ -40,6 +40,16 @@ feature 'User can edit his answer', "
         expect(page).to have_content "Body can't be blank"
       end
     end
+
+    scenario 'attach files while editing his answer' do
+      click_on 'Edit'
+      within('.answers') do
+        attach_file 'File', "#{Rails.root}/README.md"
+        click_on 'Save'
+
+        expect(page).to have_link 'README.md'
+      end
+    end
   end
 
   describe 'Authenticated user', js: true do
