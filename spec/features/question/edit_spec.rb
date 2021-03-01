@@ -43,6 +43,16 @@ feature 'User can edit his question', "
         expect(page).to have_content "Body can't be blank"
       end
     end
+
+    scenario 'add files while editing question' do
+      click_on 'Edit'
+      within('.questions') do
+        attach_file 'File', "#{Rails.root}/README.md"
+        click_on 'Save'
+      end
+      visit question_path(question)
+      expect(page).to have_link 'README.md'
+    end
   end
 
   describe 'Authenticated user', js: true do

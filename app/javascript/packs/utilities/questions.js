@@ -7,4 +7,5 @@ function editQuestion(event){
   $(this).hide()
   var questionId = $(this).data('questionId')
   $('form#edit-question-' + questionId).removeClass('hidden')
+  $('#file-question-' + questionId).removeClass('hidden')
 }
