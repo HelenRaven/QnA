@@ -7,6 +7,7 @@ feature 'User can edit his answer', "
 " do
   given!(:user)     { create(:user) }
   given!(:question) { create(:question) }
+  given!(:answer_with_file) { create(:answer_with_file) }
   given!(:answer)   { create(:answer, question: question) }
 
   describe 'Authenticated author', js: true do
@@ -57,17 +58,23 @@ feature 'User can edit his answer', "
       expect(page).to have_link 'rails_helper.rb'
       expect(page).to have_link 'README.md'
     end
-
+  end
+  describe 'Authenticated author', js: true do
+    background do
+      sign_in(answer_with_file.user)
+      visit question_path(answer_with_file.question)
+    end
     scenario 'delete files while editing his answer' do
       within('.answers') do
-        click_on(id: "delete-file-#{answer.files.first.id}")
+        click_on(id: "delete-file-#{answer_with_file.files.first.id}")
 
-        expect(page).to_not have_link answer.files.first.filename.to_s
+        expect(page).to_not have_link answer_with_file.files.first.filename.to_s
       end
     end
   end
 
   describe 'Authenticated user', js: true do
+
     scenario "tries to edit other user's answer" do
       sign_in(user)
       visit question_path(answer.question)

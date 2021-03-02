@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe AttachmentsController, type: :controller do
   let!(:user)     { create(:user) }
-  let!(:question) { create(:question) }
+  let!(:question) { create(:question_with_file) }
 
   describe 'DELETE #destroy' do
     context 'Authorized author' do

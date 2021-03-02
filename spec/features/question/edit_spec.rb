@@ -7,6 +7,7 @@ feature 'User can edit his question', "
 " do
   given!(:user)     { create(:user) }
   given!(:question) { create(:question) }
+  given!(:question_with_file) {create(:question_with_file)}
 
   describe 'Authenticated author', js: true do
     background do
@@ -61,12 +62,18 @@ feature 'User can edit his question', "
       expect(page).to have_link 'rails_helper.rb'
       expect(page).to have_link 'spec_helper.rb'
     end
+  end
 
+  describe 'Authenticated author', js: true do
+    background do
+      sign_in(question_with_file.user)
+      visit questions_path
+    end
     scenario 'delete files while editing his question' do
       click_on 'Edit'
       within('.questions') do
-        click_on(id: "delete-file-#{question.files.first.id}")
-        expect(page).to_not have_link question.files.first.filename.to_s
+        click_on(id: "delete-file-#{question_with_file.files.first.id}")
+        expect(page).to_not have_link question_with_file.files.first.filename.to_s
       end
     end
   end
