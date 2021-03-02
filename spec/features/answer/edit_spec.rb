@@ -57,6 +57,14 @@ feature 'User can edit his answer', "
       expect(page).to have_link 'rails_helper.rb'
       expect(page).to have_link 'README.md'
     end
+
+    scenario 'delete files while editing his answer' do
+      within('.answers') do
+        click_on(id: "delete-file-#{answer.files.first.id}")
+
+        expect(page).to_not have_link answer.files.first.filename.to_s
+      end
+    end
   end
 
   describe 'Authenticated user', js: true do

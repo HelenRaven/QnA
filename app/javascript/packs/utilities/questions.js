@@ -9,7 +9,7 @@ function editQuestion(event){
   var questionId = $(this).data('questionId')
   $('form#edit-question-' + questionId).removeClass('hidden')
 
-  $('#file-question-' + questionId + '.hidden-link').each(function(){
+  $('.attachments-' + questionId).find('a').each(function(){
     $(this).removeClass('hidden-link')
   })
 }

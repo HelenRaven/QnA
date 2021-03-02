@@ -2,9 +2,8 @@
 
   = link_to 'Edit', '#', class: 'edit-question-link', data: { question_id: question.id}
 
-  - if question.files.attached?
-    - question.files.each do |file|
-      p= link_to file.filename.to_s, url_for(file), class: 'hidden-link', id: "file-question-#{question.id}"
+  div class = "attachments-#{question.id}"
+    = render partial: 'attachments/attachments', locals: { resource: question, hide: true }
 
   = form_with model: question, local: false, class: 'hidden', html: {id: "edit-question-#{question.id}"} do |f|
     p

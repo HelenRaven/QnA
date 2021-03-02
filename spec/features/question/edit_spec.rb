@@ -61,6 +61,14 @@ feature 'User can edit his question', "
       expect(page).to have_link 'rails_helper.rb'
       expect(page).to have_link 'spec_helper.rb'
     end
+
+    scenario 'delete files while editing his question' do
+      click_on 'Edit'
+      within('.questions') do
+        click_on(id: "delete-file-#{question.files.first.id}")
+        expect(page).to_not have_link question.files.first.filename.to_s
+      end
+    end
   end
 
   describe 'Authenticated user', js: true do

@@ -21,6 +21,10 @@ FactoryBot.define do
       best_answer factory: :answer
     end
 
+    after(:create) do |question|
+      question.files.attach(io: File.open(Rails.root.join("spec","files","star.jpg")),filename: 'star.jpg', content_type: 'image/jpeg')
+    end
+
     factory :question_with_answers do
       transient do
         answers_count { 5 }
