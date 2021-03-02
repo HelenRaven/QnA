@@ -47,11 +47,19 @@ feature 'User can edit his question', "
     scenario 'add files while editing question' do
       click_on 'Edit'
       within('.questions') do
-        attach_file 'File', "#{Rails.root}/README.md"
+        attach_file 'File', "#{Rails.root}/spec/rails_helper.rb"
         click_on 'Save'
       end
+
+      click_on 'Edit'
+      within('.questions') do
+        attach_file 'File', "#{Rails.root}/spec/spec_helper.rb"
+        click_on 'Save'
+        sleep(5)
+      end
       visit question_path(question)
-      expect(page).to have_link 'README.md'
+      expect(page).to have_link 'rails_helper.rb'
+      expect(page).to have_link 'spec_helper.rb'
     end
   end
 

@@ -19,6 +19,7 @@ class QuestionsController < ApplicationController
 
   def create
     @question = current_user.questions.new(question_params)
+    attach_files(@question)
 
     if @question.save
       redirect_to @question, notice: 'Your question successfully created.'
@@ -29,11 +30,15 @@ class QuestionsController < ApplicationController
 
   def update
     @questions = Question.all
-    question.update(question_params) if current_user.author?(question)
+    if current_user.author?(question)
+      question.update(question_params)
+      attach_files(question)
+    end
   end
 
   def destroy
     if current_user.author?(question)
+      question.best_answer&.unmark_as_best
       question.destroy
       flash[:notice] = 'Your question was successfully deleted.'
     else
@@ -49,6 +54,12 @@ class QuestionsController < ApplicationController
   end
 
   def question_params
-    params.require(:question).permit(:title, :body, files: [])
+    params.require(:question).permit(:title, :body)
+  end
+
+  def attach_files(question)
+    if params[:question][:files].present?
+        question.files.attach(params[:question][:files])
+    end
   end
 end

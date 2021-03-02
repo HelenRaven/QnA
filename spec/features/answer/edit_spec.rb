@@ -44,11 +44,18 @@ feature 'User can edit his answer', "
     scenario 'attach files while editing his answer' do
       click_on 'Edit'
       within('.answers') do
+        attach_file 'File', "#{Rails.root}/spec/rails_helper.rb"
+        click_on 'Save'
+      end
+
+      click_on 'Edit'
+      within('.answers') do
         attach_file 'File', "#{Rails.root}/README.md"
         click_on 'Save'
-
-        expect(page).to have_link 'README.md'
       end
+      wait_for_ajax
+      expect(page).to have_link 'rails_helper.rb'
+      expect(page).to have_link 'README.md'
     end
   end
 
