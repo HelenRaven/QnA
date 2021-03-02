@@ -7,11 +7,11 @@ class Answer < ApplicationRecord
   validates :body, presence: true
 
   def mark_as_best
-    question.update(best_answer_id: self.id)
+    question.update(best_answer_id: id)
   end
 
   def best?
-    question.best_answer_id == self.id
+    question.best_answer_id == id
   end
 
   def unmark_as_best

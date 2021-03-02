@@ -9,7 +9,9 @@ RSpec.describe AttachmentsController, type: :controller do
       before { login(question.user) }
 
       it 'deletes the file' do
-        expect { delete :destroy, params: { id: question.files.first.id }, format: :js }.to change(question.files, :count).by(-1)
+        expect do
+          delete :destroy, params: { id: question.files.first.id }, format: :js
+        end.to change(question.files, :count).by(-1)
       end
     end
 
@@ -17,13 +19,17 @@ RSpec.describe AttachmentsController, type: :controller do
       before { login(user) }
 
       it 'can not deletes the file' do
-        expect { delete :destroy, params: { id: question.files.first.id }, format: :js }.to_not change(question.files, :count)
+        expect do
+          delete :destroy, params: { id: question.files.first.id }, format: :js
+        end.to_not change(question.files, :count)
       end
     end
 
     context 'Unauthorized user' do
       it 'can not deletes the file' do
-        expect { delete :destroy, params: { id: question.files.first.id }, format: :js }.to_not change(question.files, :count)
+        expect do
+          delete :destroy, params: { id: question.files.first.id }, format: :js
+        end.to_not change(question.files, :count)
       end
     end
   end

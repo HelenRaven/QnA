@@ -58,8 +58,6 @@ class QuestionsController < ApplicationController
   end
 
   def attach_files(question)
-    if params[:question][:files].present?
-        question.files.attach(params[:question][:files])
-    end
+    question.files.attach(params[:question][:files]) if params[:question][:files].present?
   end
 end

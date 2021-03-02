@@ -26,9 +26,7 @@ class AnswersController < ApplicationController
 
   def destroy
     if current_user.author?(answer)
-      if answer.best?
-        answer.unmark_as_best
-      end
+      answer.unmark_as_best if answer.best?
       answer.destroy
     else
       flash.now[:notice] = "You cant't delete someone else's answer"
@@ -50,8 +48,6 @@ class AnswersController < ApplicationController
   end
 
   def attach_files(answer)
-    if params[:answer][:files].present?
-        answer.files.attach(params[:answer][:files])
-    end
+    answer.files.attach(params[:answer][:files]) if params[:answer][:files].present?
   end
 end
