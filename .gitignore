@@ -36,3 +36,6 @@ yarn-debug.log*
 .yarn-integrity
 
 /config/database.yml
+
+.env
+zinc-silicon-306309-8c40f56cd9ad.json
