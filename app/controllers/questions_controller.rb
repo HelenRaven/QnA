@@ -8,10 +8,13 @@ class QuestionsController < ApplicationController
 
   def show
     @new_answer = Answer.new
+    @link = @new_answer.links.new
     question
   end
 
-  def new; end
+  def new
+    @link = question.links.new
+  end
 
   def edit
     render :show, notice: "You can't edit someone else's question" unless current_user.author?(question)
@@ -54,7 +57,7 @@ class QuestionsController < ApplicationController
   end
 
   def question_params
-    params.require(:question).permit(:title, :body)
+    params.require(:question).permit(:title, :body, links_attributes: [:id, :name, :url, :_destroy])
   end
 
   def attach_files(question)

@@ -3,6 +3,9 @@ div class = "answer-#{best_answer.id}"
   b Best answer
   p= best_answer.body
 
+  .links
+    = render partial: 'links/links', locals: { resource: best_answer }
+
   div class = "attachments-#{best_answer.id}"
     = render partial:'attachments/attachments', locals: {resource: best_answer, hide: false}
 

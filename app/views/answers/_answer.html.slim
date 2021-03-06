@@ -2,6 +2,9 @@ div class = "answer-#{answer.id}"
 
   p= answer.body
 
+  .links
+    = render partial: 'links/links', locals: { resource: answer }
+
   div class = "attachments-#{answer.id}"
     = render partial: 'attachments/attachments', locals: {resource: answer, hide: false}
 
