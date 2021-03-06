@@ -1,6 +1,9 @@
 - if resource&.links.length != 0
   p Links:
   - resource.links.each do |link|
-    = link_to link.name, link.url, target: 'blank'
-    - if link.gist?
-      =javascript_include_tag link.url + '.js'
+    p
+      = link_to link.name, link.url, target: 'blank'
+      - if current_user&.author?(resource)
+        = link_to 'Delete link', link_path(link), remote: true, method: :delete, id: "delete-link-#{link.id}"
+      - if link.gist?
+        =javascript_include_tag link.url + '.js'

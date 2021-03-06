@@ -9,6 +9,8 @@ feature 'User can edit his question', "
   given!(:question) { create(:question) }
   given!(:question_with_file) {create(:question_with_file)}
   given(:url)       { 'http://google.com'}
+  given!(:question_with_links)  { create(:question_with_links) }
+  given(:first_link) { question_with_links.links.first.name }
 
   describe 'Authenticated author', js: true do
     background do
@@ -76,6 +78,22 @@ feature 'User can edit his question', "
       visit question_path(question)
       expect(page).to have_link 'My link', href: url
     end
+  end
+
+  describe 'Authenticated author', js: true do
+    background do
+      sign_in(question_with_links.user)
+      visit questions_path
+    end
+    scenario 'delete links while editing his question' do
+      click_on 'Edit'
+      within('.questions') do
+        click_on(id: "delete-link-#{question_with_links.links.first.id}")
+      end
+      visit question_path(question_with_links)
+      expect(page).to_not have_link question_with_links.links.first
+    end
+
   end
 
   describe 'Authenticated author', js: true do

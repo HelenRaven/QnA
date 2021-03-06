@@ -28,6 +28,16 @@ FactoryBot.define do
       end
     end
 
+    factory :question_with_links do
+      transient do
+        links_count { 3 }
+      end
+
+      after(:create) do |question, evaluator|
+        create_list(:link, evaluator.links_count, linkable: question)
+      end
+    end
+
     factory :question_with_answers do
       transient do
         answers_count { 5 }
