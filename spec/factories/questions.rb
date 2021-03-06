@@ -21,10 +21,6 @@ FactoryBot.define do
       best_answer factory: :answer
     end
 
-    trait :with_links do
-      links factory: :link
-    end
-
     factory :question_with_file do
       after(:create) do |question|
         question.files.attach(io: File.open(Rails.root.join("spec", "files", "star.jpg")), filename: 'star.jpg',

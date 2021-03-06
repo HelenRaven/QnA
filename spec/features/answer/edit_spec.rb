@@ -9,6 +9,7 @@ feature 'User can edit his answer', "
   given!(:question) { create(:question) }
   given!(:answer_with_file) { create(:answer_with_file) }
   given!(:answer)   { create(:answer, question: question) }
+  given(:url)       { 'http://google.com'}
 
   describe 'Authenticated author', js: true do
     background do
@@ -57,6 +58,18 @@ feature 'User can edit his answer', "
       wait_for_ajax
       expect(page).to have_link 'rails_helper.rb'
       expect(page).to have_link 'README.md'
+    end
+
+    scenario 'add links while editing his answer' do
+      click_on 'Edit'
+      within('.answers') do
+        click_on 'add link'
+        fill_in 'Link name', with: 'My link'
+        fill_in 'Url', with: url
+        click_on 'Save'
+      end
+
+      expect(page).to have_link 'My link', href: url
     end
   end
   describe 'Authenticated author', js: true do
