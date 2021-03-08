@@ -4,6 +4,7 @@ class QuestionsController < ApplicationController
 
   def index
     @questions = Question.all
+    @award = Award.new
   end
 
   def show
@@ -14,6 +15,7 @@ class QuestionsController < ApplicationController
 
   def new
     @link = question.links.new
+    @award = question.build_award
   end
 
   def edit
@@ -57,7 +59,7 @@ class QuestionsController < ApplicationController
   end
 
   def question_params
-    params.require(:question).permit(:title, :body, links_attributes: [:id, :name, :url, :_destroy])
+    params.require(:question).permit(:title, :body, links_attributes: [:id, :name, :url, :_destroy], award_attributes: [:id, :title, :image, :_destroy])
   end
 
   def attach_files(question)

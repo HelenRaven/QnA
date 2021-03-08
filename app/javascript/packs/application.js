@@ -18,6 +18,7 @@ window.$ = window.jQuery = jQuery;
 require("@nathanvda/cocoon")
 require("packs/utilities/answers")
 require("packs/utilities/questions")
+//require("packs/utilities/gist_links")
 
 Rails.start()
 Turbolinks.start()

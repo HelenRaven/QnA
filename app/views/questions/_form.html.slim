@@ -2,6 +2,9 @@
 
   = link_to 'Edit', '#', class: 'edit-question-link', data: { question_id: question.id}
 
+  div class = "award-#{question.id} hidden"
+    = render partial: 'awards/awards', locals: {question: question }
+
   div class = "attachments-#{question.id} hidden"
     = render partial: 'attachments/attachments', locals: { resource: question }
 
@@ -20,8 +23,6 @@
       = f.file_field :files, multiple: true
     p
     #links
-      = f.fields_for :links do |link|
-
       .actions
         = link_to_add_association 'add link', f, :links, partial: 'links/link_fields'
 

@@ -10,5 +10,6 @@ function editQuestion(event){
   $('form#edit-question-' + questionId).removeClass('hidden')
   $('.attachments-' + questionId).removeClass('hidden')
   $('.links-' + questionId).removeClass('hidden')
+  $('.award-' + questionId).removeClass('hidden')
 }
 

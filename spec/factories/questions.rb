@@ -12,6 +12,7 @@ FactoryBot.define do
     body
     user
     best_answer { nil }
+    award { nil }
 
     trait :invalid do
       title { nil }
@@ -19,6 +20,10 @@ FactoryBot.define do
 
     trait :with_best_answer do
       best_answer factory: :answer
+    end
+
+    trait :with_award do
+      award factory: :award
     end
 
     factory :question_with_file do

@@ -11,6 +11,7 @@ class Answer < ApplicationRecord
 
   def mark_as_best
     question.update(best_answer_id: id)
+    question.award&.update(user: user)
   end
 
   def best?
@@ -19,5 +20,6 @@ class Answer < ApplicationRecord
 
   def unmark_as_best
     question.update(best_answer_id: nil)
+    question.award&.update(user: nil)
   end
 end
