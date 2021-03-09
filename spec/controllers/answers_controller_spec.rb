@@ -5,7 +5,7 @@ RSpec.describe AnswersController, type: :controller do
   let!(:question) { create(:question) }
   let!(:answer)   { create(:answer, question: question) }
   let(:old_body)  { answer.body }
-  let(:question_w){ create(:question, :with_best_answer, user: user) }
+  let(:question_w) { create(:question, :with_best_answer, user: user) }
 
   describe 'Get #edit' do
     it 'renders edit view for authorized author' do

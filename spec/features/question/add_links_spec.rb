@@ -7,7 +7,7 @@ feature 'User can add links to question', "
 " do
   given(:user)      { create(:user) }
   given(:gist_url)  { 'https://gist.github.com/HelenRaven/b98553ef55c033f7c37e7596f6da3151' }
-  given(:bad_url){ 'gist.github.com/HelenRaven/b98553ef55c033f7c37e7596f6da3151' }
+  given(:bad_url) { 'gist.github.com/HelenRaven/b98553ef55c033f7c37e7596f6da3151' }
 
   before do
     sign_in(user)

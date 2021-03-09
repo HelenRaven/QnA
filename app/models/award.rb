@@ -5,6 +5,5 @@ class Award < ApplicationRecord
   has_one_attached :image
 
   validates :title, presence: true
-  validates :image, attached: true, content_type: [:png, :jpg, :jpeg]
-
+  validates :image, attached: true, content_type: %i[png jpg jpeg]
 end

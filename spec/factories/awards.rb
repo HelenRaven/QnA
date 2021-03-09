@@ -5,8 +5,8 @@ FactoryBot.define do
     user
 
     before(:create) do |award|
-        award.image.attach(io: File.open(Rails.root.join("spec", "files", "star.jpg")), filename: 'star.jpg',
-                            content_type: 'image/jpeg')
-      end
+      award.image.attach(io: File.open(Rails.root.join("spec", "files", "star.jpg")), filename: 'star.jpg',
+                         content_type: 'image/jpeg')
+    end
   end
 end

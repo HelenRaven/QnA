@@ -7,9 +7,9 @@ feature 'User can edit his question', "
 " do
   given!(:user)     { create(:user) }
   given!(:question) { create(:question) }
-  given!(:question_with_file) {create(:question_with_file)}
-  given(:url)       { 'http://google.com'}
-  given!(:question_with_links)  { create(:question_with_links) }
+  given!(:question_with_file) { create(:question_with_file) }
+  given(:url) { 'http://google.com' }
+  given!(:question_with_links) { create(:question_with_links) }
   given(:first_link) { question_with_links.links.first.name }
 
   describe 'Authenticated author', js: true do
@@ -93,7 +93,6 @@ feature 'User can edit his question', "
       visit question_path(question_with_links)
       expect(page).to_not have_link question_with_links.links.first
     end
-
   end
 
   describe 'Authenticated author', js: true do

@@ -18,7 +18,7 @@ RSpec.describe Answer, type: :model do
       answer.mark_as_best
     end
     it { expect(question.best_answer).to eq answer }
-    it { expect(question.award.user).to eq answer.user}
+    it { expect(question.award.user).to eq answer.user }
   end
 
   describe '#unmark_as_best' do

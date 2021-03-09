@@ -29,7 +29,7 @@ FactoryBot.define do
     factory :question_with_file do
       after(:create) do |question|
         question.files.attach(io: File.open(Rails.root.join("spec", "files", "star.jpg")), filename: 'star.jpg',
-                            content_type: 'image/jpeg')
+                              content_type: 'image/jpeg')
       end
     end
 

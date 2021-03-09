@@ -5,8 +5,7 @@ feature 'User can view his awards', "
   As an answers's author
   I'd like to be able to view my awards
 " do
-  given(:user)      { create(:user_with_awards) }
-
+  given(:user) { create(:user_with_awards) }
 
   scenario 'User view his awards', js: true do
     sign_in(user)
@@ -17,5 +16,4 @@ feature 'User can view his awards', "
       expect(page).to have_content award.title
     end
   end
-
 end

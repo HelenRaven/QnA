@@ -10,8 +10,10 @@ class Answer < ApplicationRecord
   validates :body, presence: true
 
   def mark_as_best
-    question.update(best_answer_id: id)
-    question.award&.update(user: user)
+    self.transaction do
+      question.update!(best_answer_id: id)
+      question.award&.update!(user: user)
+    end
   end
 
   def best?
@@ -19,7 +21,9 @@ class Answer < ApplicationRecord
   end
 
   def unmark_as_best
-    question.update(best_answer_id: nil)
-    question.award&.update(user: nil)
+    self.transaction do
+      question.update!(best_answer_id: nil)
+      question.award&.update!(user: nil)
+    end
   end
 end

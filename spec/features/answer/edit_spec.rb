@@ -9,7 +9,7 @@ feature 'User can edit his answer', "
   given!(:question) { create(:question) }
   given!(:answer_with_file) { create(:answer_with_file) }
   given!(:answer)   { create(:answer, question: question) }
-  given(:url)       { 'http://google.com'}
+  given(:url)       { 'http://google.com' }
 
   describe 'Authenticated author', js: true do
     background do
@@ -87,7 +87,6 @@ feature 'User can edit his answer', "
   end
 
   describe 'Authenticated user', js: true do
-
     scenario "tries to edit other user's answer" do
       sign_in(user)
       visit question_path(answer.question)

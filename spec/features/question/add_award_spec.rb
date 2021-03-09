@@ -8,7 +8,6 @@ feature 'User can add award to question', "
   given(:user)      { create(:user) }
   given(:question)  { create(:question_with_answers) }
 
-
   before do
     sign_in(user)
     visit questions_path
@@ -26,7 +25,6 @@ feature 'User can add award to question', "
     visit questions_path
     click_on 'Edit'
     expect(page).to have_content 'new award'
-
   end
 
   scenario 'User adds invalid award when asks question' do
