@@ -2,8 +2,8 @@ module Voted
   extend ActiveSupport::Concern
 
   included do
+    before_action :authenticate_user!, only: %i[vote_up vote_down vote_cancel]
     before_action :set_votable, only: %i[vote_up vote_down vote_cancel]
-    before_action :authenticate_user!
   end
 
   def vote_up

@@ -14,20 +14,37 @@ describe 'votable' do
   let(:users)  { create_list(:user, 3) }
   let(:object) { WithVotable.create! }
 
-  it '#rating' do
-    expect(WithVotable.new.rating).to eq 0
+  describe '#rating' do
+    it 'have zero rating after create' do
+      expect(WithVotable.new.rating).to eq 0
+    end
   end
 
-  it '#vote' do
-    users.each do |user|
-      object.vote(user, 1)
+  describe '#vote' do
+    it 'increase rating by voting up' do
+      users.each do |user|
+        object.vote(user, 1)
+      end
+      expect(object.rating).to eq users.count
     end
-    expect(object.rating).to eq users.count
 
-    object.vote(users.first, 0)
-    expect(object.rating).to eq users.count - 1
+    it 'reduces rating after canceling voting' do
+      users.each do |user|
+        object.vote(user, 1)
+      end
 
-    object.vote(users.first, -1)
-    expect(object.rating).to eq users.count - 2
+      object.vote(users.first, 0)
+      expect(object.rating).to eq users.count - 1
+    end
+
+    it 'reduces rating by voting down' do
+      users.each do |user|
+        object.vote(user, 1)
+      end
+      expect(object.rating).to eq users.count
+
+      object.vote(users.first, -1)
+      expect(object.rating).to eq users.count - 1
+    end
   end
 end

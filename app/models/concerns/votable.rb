@@ -6,7 +6,7 @@ module Votable
   end
 
   def rating
-    vote_count(1) - vote_count(-1)
+    votes.sum(:value)
   end
 
   def vote(user, vote_value)
@@ -15,11 +15,5 @@ module Votable
     elsif !user.author?(self)
       votes.create(user_id: user.id, value: vote_value)
     end
-  end
-
-  private
-
-  def vote_count(vote_value)
-    votes.where(value: vote_value).count
   end
 end
