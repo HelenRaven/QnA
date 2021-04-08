@@ -37,6 +37,8 @@ gem 'rubocop-rails', require: false
 gem 'slim-rails'
 gem 'validate_url'
 gem 'with_model'
+gem 'gon'
+gem 'handlebars-source', '~> 4.7', '>= 4.7.7'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

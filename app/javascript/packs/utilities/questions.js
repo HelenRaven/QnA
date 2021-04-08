@@ -12,4 +12,3 @@ function editQuestion(event){
   $('.links-' + questionId).removeClass('hidden')
   $('.award-' + questionId).removeClass('hidden')
 }
-
