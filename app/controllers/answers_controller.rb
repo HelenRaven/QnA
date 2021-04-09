@@ -2,7 +2,9 @@ class AnswersController < ApplicationController
   include Voted
 
   before_action :authenticate_user!
+  after_action  :publish_answer, only: %i[create]
   helper_method :answer, :question
+
 
   def edit
     redirect_to answer.question, notice: "You can't edit someone else's answer" unless current_user.author?(answer)
@@ -51,5 +53,10 @@ class AnswersController < ApplicationController
 
   def attach_files(answer)
     answer.files.attach(params[:answer][:files]) if params[:answer][:files].present?
+  end
+
+  def publish_answer
+    return if @answer.errors.any?
+    ActionCable.server.broadcast("answer_for_#{@answer.question_id}", answer: @answer, links: @answer.links)
   end
 end
