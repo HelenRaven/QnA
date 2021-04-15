@@ -197,15 +197,18 @@ GEM
     mimemagic (0.3.5)
     mini_magick (4.11.0)
     mini_mime (1.0.2)
-    mini_portile2 (2.5.0)
     minitest (5.14.3)
     msgpack (1.4.2)
     multi_json (1.15.0)
     multipart-post (2.1.1)
     nio4r (2.5.5)
-    nokogiri (1.11.1)
-      mini_portile2 (~> 2.5.0)
+    nokogiri (1.11.1-x86_64-linux)
       racc (~> 1.4)
+    octicons (11.2.0)
+      nokogiri (>= 1.6.3.1)
+    octicons_helper (11.2.0)
+      octicons (= 11.2.0)
+      rails
     orm_adapter (0.5.0)
     os (1.1.1)
     parallel (1.20.1)
@@ -401,14 +404,15 @@ DEPENDENCIES
   launchy
   listen (~> 3.3)
   mini_magick
+  octicons_helper
   pg (~> 1.1)
   puma (~> 5.0)
   rack-mini-profiler (~> 2.0)
-  rails (~> 6.1.2, >= 6.1.2.1)
+  rails
   rails-controller-testing
-  rspec-rails (~> 4.0.2)
+  rspec-rails
   rubocop-rails
-  sass-rails (>= 6)
+  sass-rails
   selenium-webdriver
   shoulda-matchers
   slim-rails

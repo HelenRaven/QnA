@@ -8,7 +8,6 @@ class QuestionsController < ApplicationController
   def index
     @questions = Question.all
     @award = Award.new
-    gon.current_user = current_user
   end
 
   def show

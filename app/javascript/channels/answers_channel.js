@@ -8,7 +8,6 @@ $(document).on('turbolinks:load', function(){
     consumer.subscriptions.create({channel: 'AnswersChannel', question: path[2]},{
       received(data){
 
-        console.log(data.links)
         if (gon.current_user_id != data.answer.user_id){
           var result = this.createTemplate(data)
           $('.answers').append(result)

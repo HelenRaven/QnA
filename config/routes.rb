@@ -20,9 +20,9 @@ Rails.application.routes.draw do
       member do
         patch :best
       end
-      resources :comments, only: %i[create], defaults: { context: 'answer'}
+      resources :comments, only: %i[create], defaults: { commentable: 'answer'}
     end
-    resources :comments, only: %i[create], defaults: { context: 'question'}
+    resources :comments, only: %i[create], defaults: { commentable: 'question'}
   end
 
   mount ActionCable.server => '/cable'

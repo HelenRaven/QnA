@@ -1,6 +1,6 @@
 class AnswersChannel < ApplicationCable::Channel
   def subscribed
-    stream_from "answer_for_#{params[:question]}"
+    stream_from "questions/#{params[:question]}"
   end
 
   def unsubscribed
