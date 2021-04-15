@@ -1,7 +1,8 @@
 import consumer from "./consumer"
 
 $(document).on('turbolinks:load', function(){
-  if($('.questions')) {
+
+  if($('.questions').length == 1 ) {
     consumer.subscriptions.create('QuestionsChannel',{
       received(data){
         var result = this.createTemplate(data.question)
@@ -10,7 +11,7 @@ $(document).on('turbolinks:load', function(){
 
       createTemplate(question){
         return `
-        <div class = "question-#${question.id}">
+        <div class = "question-${question.id}">
           <a  title = ${question.title} href = 'questions/${question.id}'> ${question.title}</a>
         </div>
         `

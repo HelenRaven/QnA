@@ -1,10 +1,10 @@
 import consumer from "./consumer"
 
 $(document).on('turbolinks:load', function(){
+  var path = $(location).attr('pathname').split('/')
 
+  if(path[1] == 'questions' && path.length > 2 ) {
 
-  if($('.answers') ){
-    var path = $(location).attr('pathname').split('/')
     consumer.subscriptions.create({channel: 'AnswersChannel', question: path[2]},{
       received(data){
 
@@ -16,9 +16,10 @@ $(document).on('turbolinks:load', function(){
 
       createTemplate(data){
         var result =  `
-        <div class = "answer-#${data.answer.id}">
+        <div class = "answer-${data.answer.id}">
           <p> ${data.answer.body}</p>
           <p> Rating: 0 </p>
+          <div class = "comments-${data.answer.id}"></div>
         </div>
         `
         $.each(data.links, function(index, value) {
