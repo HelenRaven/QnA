@@ -1,5 +1,4 @@
 class CommentsController < ApplicationController
-
   before_action :authenticate_user!
   before_action :set_commentable, only: %i[create]
   after_action  :publish_comment, only: %i[create]
@@ -18,7 +17,8 @@ class CommentsController < ApplicationController
 
   def publish_comment
     return if @comment.errors.any?
-    ActionCable.server.broadcast("comments/#{question_id}", comment: @comment )
+
+    ActionCable.server.broadcast("comments/#{question_id}", comment: @comment)
   end
 
   def commentable_id
@@ -32,9 +32,9 @@ class CommentsController < ApplicationController
 
   def question_id
     if @commentable.is_a? Question
-      return @commentable.id
+      @commentable.id
     else
-      return @commentable.question.id
+      @commentable.question.id
     end
   end
 end

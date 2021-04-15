@@ -3,6 +3,5 @@ class AnswersChannel < ApplicationCable::Channel
     stream_from "questions/#{params[:question]}"
   end
 
-  def unsubscribed
-  end
+  def unsubscribed; end
 end

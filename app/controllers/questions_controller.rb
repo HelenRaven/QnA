@@ -35,7 +35,6 @@ class QuestionsController < ApplicationController
     else
       render :new
     end
-
   end
 
   def update
@@ -74,6 +73,7 @@ class QuestionsController < ApplicationController
 
   def publish_question
     return if @question.errors.any?
-    ActionCable.server.broadcast('questions', question: @question )
+
+    ActionCable.server.broadcast('questions', question: @question)
   end
 end

@@ -1,10 +1,10 @@
 import consumer from "./consumer"
 
 $(document).on('turbolinks:load', function(){
-  var path = $(location).attr('pathname').split('/')
 
-  if(path[1] == 'questions' && path.length > 2 ){
 
+  if($('.answers') ){
+    var path = $(location).attr('pathname').split('/')
     consumer.subscriptions.create({channel: 'AnswersChannel', question: path[2]},{
       received(data){
 

@@ -5,7 +5,6 @@ class AnswersController < ApplicationController
   after_action  :publish_answer, only: %i[create]
   helper_method :answer, :question
 
-
   def edit
     redirect_to answer.question, notice: "You can't edit someone else's answer" unless current_user.author?(answer)
   end
@@ -57,6 +56,7 @@ class AnswersController < ApplicationController
 
   def publish_answer
     return if @answer.errors.any?
+
     ActionCable.server.broadcast("questions/#{@answer.question_id}", answer: @answer, links: @answer.links)
   end
 end

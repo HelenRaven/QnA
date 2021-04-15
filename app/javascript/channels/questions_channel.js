@@ -1,9 +1,7 @@
 import consumer from "./consumer"
 
 $(document).on('turbolinks:load', function(){
-  var path = $(location).attr('pathname').split('/')
-
-  if(path[1] == 'questions' && path.length == 2){
+  if($('.questions')) {
     consumer.subscriptions.create('QuestionsChannel',{
       received(data){
         var result = this.createTemplate(data.question)
