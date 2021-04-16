@@ -4,13 +4,13 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '2.7.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
-gem 'rails', '~> 6.1.2', '>= 6.1.2.1'
+gem 'rails'
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 1.1'
 # Use Puma as the app server
 gem 'puma', '~> 5.0'
 # Use SCSS for stylesheets
-gem 'sass-rails', '>= 6'
+gem 'sass-rails'
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
 gem 'webpacker', '~> 5.0'
 # Turbolinks makes navigating your web application faster. Read more: https://github.com/turbolinks/turbolinks
@@ -30,9 +30,12 @@ gem 'active_storage_validations'
 gem "aws-sdk-s3", require: false
 gem 'bootsnap', '>= 1.4.4', require: false
 gem 'cocoon'
+gem 'gon'
 gem "google-cloud-storage", "~> 1.11", require: false
+gem 'handlebars-source', '~> 4.7', '>= 4.7.7'
 gem 'jquery-rails'
 gem 'mini_magick'
+gem 'octicons_helper'
 gem 'rubocop-rails', require: false
 gem 'slim-rails'
 gem 'validate_url'
@@ -43,7 +46,7 @@ group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'dotenv-rails'
   gem 'factory_bot_rails'
-  gem 'rspec-rails', '~> 4.0.2'
+  gem 'rspec-rails'
   # gem 'rubocop'
 end
 
