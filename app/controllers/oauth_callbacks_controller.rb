@@ -1,5 +1,4 @@
 class OauthCallbacksController < Devise::OmniauthCallbacksController
-
   def github
     sign_in_with_provider('Github')
   end
@@ -15,7 +14,7 @@ class OauthCallbacksController < Devise::OmniauthCallbacksController
 
     if @user&.persisted?
       sign_in_and_redirect @user, event: :authentication
-      set_flash_message(:notice, :success, kind: provider ) if is_navigational_format?
+      set_flash_message(:notice, :success, kind: provider) if is_navigational_format?
     else
       session["omniauth"] = request.env['omniauth.auth'].except(:extra)
       flash.now[:notice] = "Please enter your email"

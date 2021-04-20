@@ -6,11 +6,10 @@ RSpec.describe OauthCallbacksController, type: :controller do
   end
 
   describe 'sign_in_with_provider' do
-    let(:oauth_data) { {provider: 'github', uid: 123, info: {email: 'test@email.com'}} }
-    let(:oauth_data_without_email) { {provider: 'github', uid: 123, info: {city: 'mycity'}} }
+    let(:oauth_data) { { provider: 'github', uid: 123, info: { email: 'test@email.com' } } }
+    let(:oauth_data_without_email) { { provider: 'github', uid: 123, info: { city: 'mycity' } } }
 
     context 'provider does not transmit email ' do
-
       before do
         allow(request.env).to receive(:[]).and_call_original
         allow(request.env).to receive(:[]).with('omniauth.auth').and_return(oauth_data_without_email)
@@ -46,7 +45,6 @@ RSpec.describe OauthCallbacksController, type: :controller do
           expect(subject.current_user).to eq user
         end
 
-
         it 'redirects to root path' do
           expect(response).to redirect_to root_path
         end
@@ -61,7 +59,6 @@ RSpec.describe OauthCallbacksController, type: :controller do
         it 'redirects to new_user_registration_url' do
           expect(response).to redirect_to new_user_registration_url
         end
-
 
         it 'does not login user' do
           expect(subject.current_user).to_not be

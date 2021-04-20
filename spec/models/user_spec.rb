@@ -33,8 +33,8 @@ RSpec.describe User, type: :model do
   end
 
   describe '.new_with_session' do
-    let!(:session)  { {"omniauth" => {provider: 'facebook', uid: '123456'}} }
-    let(:result)    { User.new_with_session({},session)}
+    let!(:session)  { { "omniauth" => { provider: 'facebook', uid: '123456' } } }
+    let(:result)    { User.new_with_session({}, session) }
 
     it 'creates new user' do
       expect(subject).to be_a_new(User)

@@ -13,7 +13,7 @@ class FindForOauthService
 
     if email
       user = User.find_by(email: email)
-      if !user
+      unless user
         password = Devise.friendly_token[0, 20]
         user = User.create!(email: email, password: password, password_confirmation: password)
       end

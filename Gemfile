@@ -36,15 +36,14 @@ gem 'handlebars-source', '~> 4.7', '>= 4.7.7'
 gem 'jquery-rails'
 gem 'mini_magick'
 gem 'octicons_helper'
+gem 'omniauth'
+gem 'omniauth-github', github: 'omniauth/omniauth-github', branch: 'master'
+gem 'omniauth-rails_csrf_protection'
+gem 'omniauth-vkontakte'
 gem 'rubocop-rails', require: false
 gem 'slim-rails'
 gem 'validate_url'
 gem 'with_model'
-gem 'omniauth'
-gem 'omniauth-github', github: 'omniauth/omniauth-github', branch: 'master'
-gem 'omniauth-vkontakte'
-gem 'omniauth-rails_csrf_protection'
-
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

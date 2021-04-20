@@ -32,7 +32,6 @@ feature 'user can register', "
   end
 
   describe 'Register with Omniauth services' do
-
     describe 'GitHub' do
       scenario 'with correct data' do
         mock_auth_hash('github', email: 'test@test.ru')
