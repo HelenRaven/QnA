@@ -24,4 +24,6 @@ feature 'User can sign in', "
 
     expect(page).to have_content 'Invalid Email or password.'
   end
+
+
 end

@@ -42,7 +42,9 @@ gem 'validate_url'
 gem 'with_model'
 gem 'omniauth'
 gem 'omniauth-github', github: 'omniauth/omniauth-github', branch: 'master'
+gem 'omniauth-vkontakte'
 gem 'omniauth-rails_csrf_protection'
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
