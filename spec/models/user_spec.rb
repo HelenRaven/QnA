@@ -22,16 +22,6 @@ RSpec.describe User, type: :model do
     end
   end
 
-  describe '#author?' do
-    context 'true if author of object' do
-      it { expect(question.user).to be_author(question) }
-    end
-
-    context 'false if not author of object' do
-      it { expect(user).to_not be_author(question) }
-    end
-  end
-
   describe '.new_with_session' do
     let!(:session)  { { "omniauth" => { provider: 'facebook', uid: '123456' } } }
     let(:result)    { User.new_with_session({}, session) }
