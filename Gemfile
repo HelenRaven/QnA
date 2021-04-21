@@ -21,7 +21,7 @@ gem 'jbuilder', '~> 2.7'
 # gem 'redis', '~> 4.0'
 # Use Active Model has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
-gem 'devise'
+gem 'devise', github: 'heartcombo/devise', branch: 'ca-omniauth-2'
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 
@@ -36,6 +36,10 @@ gem 'handlebars-source', '~> 4.7', '>= 4.7.7'
 gem 'jquery-rails'
 gem 'mini_magick'
 gem 'octicons_helper'
+gem 'omniauth'
+gem 'omniauth-github', github: 'omniauth/omniauth-github', branch: 'master'
+gem 'omniauth-rails_csrf_protection'
+gem 'omniauth-vkontakte'
 gem 'rubocop-rails', require: false
 gem 'slim-rails'
 gem 'validate_url'
