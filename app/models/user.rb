@@ -12,6 +12,10 @@ class User < ApplicationRecord
   has_many :comments,   dependent: :destroy
   has_many :authorizations, dependent: :destroy
 
+  def author?(object)
+    id == object.user_id
+  end
+
   def voted?(object)
     !votes.where(votable: object).empty?
   end

@@ -24,16 +24,16 @@ class Ability
   def user_abilities
     guest_abilities
     can :create, [Question, Answer, Comment]
-    can :update, [Question, Answer], user_id: user.id
+    can :update, [Question, Answer],  user_id: user.id
     can :destroy, [Question, Answer], user_id: user.id
     can :destroy, Link,  linkable: { user_id: user.id }
     can :destroy, Award, question: { user_id: user.id }
     can :destroy, ActiveStorage::Attachment do |file|
-      file.record.user_id == user.id
+      user.author?(file.record)
     end
 
     can %i[vote_up vote_down vote_cancel], [Question, Answer] do |votable|
-      votable.user_id != user.id
+      !user.author?(votable)
     end
 
     can :best, Answer, question: { user_id: user.id }
