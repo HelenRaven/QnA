@@ -29,6 +29,7 @@ gem 'devise', github: 'heartcombo/devise', branch: 'ca-omniauth-2'
 gem 'active_storage_validations'
 gem "aws-sdk-s3", require: false
 gem 'bootsnap', '>= 1.4.4', require: false
+gem 'cancancan'
 gem 'cocoon'
 gem 'gon'
 gem "google-cloud-storage", "~> 1.11", require: false
