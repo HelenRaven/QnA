@@ -1,4 +1,5 @@
 require 'rails_helper'
+#include Rails.application.routes.url_helpers
 
 RSpec.describe OauthCallbacksController, type: :controller do
   before do
@@ -57,7 +58,7 @@ RSpec.describe OauthCallbacksController, type: :controller do
         end
 
         it 'redirects to new_user_registration_url' do
-          expect(response).to redirect_to new_user_registration_url
+          expect(response).to redirect_to new_user_registration_path
         end
 
         it 'does not login user' do

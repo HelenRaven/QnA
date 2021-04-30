@@ -1,3 +1,4 @@
+
 FactoryBot.define do
   sequence :title do |n|
     "QuestionTitle#{n}"
