@@ -31,6 +31,7 @@ gem "aws-sdk-s3", require: false
 gem 'bootsnap', '>= 1.4.4', require: false
 gem 'cancancan'
 gem 'cocoon'
+gem 'doorkeeper'
 gem 'gon'
 gem "google-cloud-storage", "~> 1.11", require: false
 gem 'handlebars-source', '~> 4.7', '>= 4.7.7'
@@ -45,6 +46,8 @@ gem 'rubocop-rails', require: false
 gem 'slim-rails'
 gem 'validate_url'
 gem 'with_model'
+gem 'active_model_serializers', '~> 0.10'
+gem 'oj'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
