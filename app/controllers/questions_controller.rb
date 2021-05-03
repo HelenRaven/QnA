@@ -51,6 +51,14 @@ class QuestionsController < ApplicationController
     redirect_to root_path
   end
 
+  def subscribe
+    current_user.subscriptions << question
+  end
+
+  def unsubscribe
+    current_user.subscriptions.delete(question)
+  end
+
   private
 
   def question
@@ -69,6 +77,6 @@ class QuestionsController < ApplicationController
   def publish_question
     return if @question.errors.any?
 
-    ActionCable.server.broadcast('questions', {question: @question} )
+    ActionCable.server.broadcast('questions', { question: @question })
   end
 end

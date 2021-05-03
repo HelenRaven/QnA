@@ -35,6 +35,10 @@ Rails.application.routes.draw do
   end
 
   resources :questions, concerns: [:votable] do
+    member do
+      patch :subscribe
+      patch :unsubscribe
+    end
     resources :answers, concerns: [:votable], only: %i[create update edit destroy], shallow: true do
       member do
         patch :best

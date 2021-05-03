@@ -12,6 +12,9 @@ class Answer < ApplicationRecord
 
   validates :body, presence: true
 
+  after_commit :send_subscriptions, on: :create
+  # after_create :send_subscriptions
+
   def mark_as_best
     transaction do
       question.update!(best_answer_id: id)
@@ -28,5 +31,11 @@ class Answer < ApplicationRecord
       question.update!(best_answer_id: nil)
       question.award&.update!(user: nil)
     end
+  end
+
+  private
+
+  def send_subscriptions
+    SubscriptionsJob.perform_later(self)
   end
 end

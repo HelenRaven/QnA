@@ -2,7 +2,7 @@ require "rails_helper"
 
 RSpec.describe DailyDigestMailer, type: :mailer do
   describe "digest" do
-    let!(:question) { create(:question)}
+    let!(:question) { create(:question) }
     let!(:user)     { create(:user) }
     let(:mail)      { DailyDigestMailer.digest(user) }
 
@@ -16,5 +16,4 @@ RSpec.describe DailyDigestMailer, type: :mailer do
       expect(mail.body.encoded).to have_content("Look at new Questions")
     end
   end
-
 end

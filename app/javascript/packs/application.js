@@ -22,6 +22,7 @@ require("packs/utilities/answers")
 require("packs/utilities/questions")
 require("packs/utilities/vote")
 require("packs/utilities/comments")
+require("packs/utilities/subscription")
 
 Rails.start()
 Turbolinks.start()

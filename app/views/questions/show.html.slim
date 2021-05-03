@@ -6,6 +6,8 @@ p= @question.body
 
 = render 'shared/vote', resource: @question
 
+= render 'shared/subscriptions', question: @question
+
 div class = "attachments-#{@question.id}"
   = render partial: 'attachments/attachments', locals: { resource: @question }
 
