@@ -9,7 +9,7 @@ RSpec.describe User, type: :model do
   it { should have_many(:votes).dependent(:destroy) }
   it { should have_many(:awards) }
   it { should have_many(:authorizations).dependent(:destroy) }
-  it { should have_and_belong_to_many(:subscriptions).dependent(:destroy) }
+  it { should have_many(:subscriptions).dependent(:destroy) }
 
   describe '.find_for_oauth' do
     let!(:user)   { create(:user) }
@@ -48,13 +48,15 @@ RSpec.describe User, type: :model do
   end
 
   describe '#subscribed?' do
-    context 'true if subscribe to question' do
-      before { user.subscriptions.push(question) }
+    let!(:subscription) {create(:subscription, question: question, user: user)}
+    let!(:another_user) {create(:user) }
+
+    context 'true if subscribed to question' do
       it { expect(user).to be_subscribed(question) }
     end
 
     context 'false if not author of object' do
-      it { expect(user).to_not be_subscribed(question) }
+      it { expect(another_user).to_not be_subscribed(question) }
     end
   end
 end

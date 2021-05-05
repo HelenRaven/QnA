@@ -207,7 +207,7 @@ RSpec.describe QuestionsController, type: :controller do
 
         it 'render update view' do
           patch :update, params: { id: question, question: attributes_for(:question) }, format: :js
-          expect(response).to render_template 'questions/update'
+          expect(response).to_not render_template :update
         end
       end
 
@@ -222,7 +222,7 @@ RSpec.describe QuestionsController, type: :controller do
         end
 
         it 'render update view' do
-          expect(response).to render_template 'questions/update'
+          expect(response).to_not render_template :update
         end
       end
     end
@@ -273,42 +273,6 @@ RSpec.describe QuestionsController, type: :controller do
       it 'redirects to sign in' do
         delete :destroy, params: { id: question }
         expect(response).to redirect_to new_user_session_path
-      end
-    end
-  end
-
-  describe 'PATCH #subscribe' do
-    context 'Authorized user' do
-      before { login(user) }
-
-      it 'subscribes the user to question' do
-        expect { patch :subscribe, params: { id: question }, format: :js }.to change(question.subscribers, :size).by(1)
-      end
-    end
-
-    context 'Unauthorized user' do
-      it 'not subscribes the user to question' do
-        expect { patch :subscribe, params: { id: question }, format: :js }.to_not change(question.subscribers, :size)
-      end
-    end
-  end
-
-  describe 'PATCH #unsubscribe' do
-    context 'Authorized user' do
-      before do
-        login(user)
-        patch :subscribe, params: { id: question }, format: :js
-      end
-
-      it 'unsubscribes the user to question' do
-        question.reload
-        expect { patch :unsubscribe, params: { id: question }, format: :js }.to change(question.subscribers, :size).by(-1)
-      end
-    end
-
-    context 'Unauthorized user' do
-      it 'not unsubscribes the user to question' do
-        expect { patch :unsubscribe, params: { id: question }, format: :js }.to_not change(question.subscribers, :size)
       end
     end
   end

@@ -1,8 +1,0 @@
-div class = 'subscription'
-- if can? :subscribe, question
-  = link_to 'Subscribe', subscribe_question_path(question), method: :patch, class: 'subscribe', remote: true
-  = link_to 'Unsubscribe', unsubscribe_question_path(question), method: :patch, class: 'unsubscribe d-none', remote: true
-
-- if can? :unsubscribe, question
-  = link_to 'Subscribe', subscribe_question_path(question), method: :patch, class: 'subscribe d-none'
-  = link_to 'Unsubscribe', unsubscribe_question_path(question), method: :patch, class: 'unsubscribe'

@@ -7,7 +7,7 @@ class Question < ApplicationRecord
   has_one  :award, dependent: :destroy
   belongs_to :best_answer, class_name: 'Answer', optional: true
   belongs_to :user
-  has_and_belongs_to_many :subscribers, class_name: 'User', dependent: :destroy
+  has_many :subscriptions, dependent: :destroy
 
   accepts_nested_attributes_for :links, reject_if: :all_blank, allow_destroy: true
   accepts_nested_attributes_for :award, reject_if: :all_blank, allow_destroy: true
@@ -16,7 +16,7 @@ class Question < ApplicationRecord
 
   validates :title, :body, presence: true
 
-  after_commit :subscribe_author, on: :create
+  after_create :subscribe_author
 
   def other_answers
     answers.where.not(id: best_answer_id)
@@ -25,6 +25,6 @@ class Question < ApplicationRecord
   private
 
   def subscribe_author
-    subscribers << user
+    subscriptions.create!(user: user)
   end
 end

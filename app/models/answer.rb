@@ -13,7 +13,6 @@ class Answer < ApplicationRecord
   validates :body, presence: true
 
   after_commit :send_subscriptions, on: :create
-  # after_create :send_subscriptions
 
   def mark_as_best
     transaction do

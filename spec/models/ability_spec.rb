@@ -25,6 +25,7 @@ describe Ability, type: :model do
     let(:other)          { create :user }
     let(:question)       { create(:question, user: user) }
     let(:other_question) { create(:question, user: other) }
+    let(:subscription)   { create(:subscription, question: question, user: user) }
     let(:question_with_file) { create(:question_with_file, user: user) }
     let(:other_question_with_file) { create(:question_with_file, user: other) }
 
@@ -78,10 +79,8 @@ describe Ability, type: :model do
     it { should_not be_able_to :best, create(:answer, question: other_question, user: user) }
     it { should_not be_able_to :best, create(:answer, question: other_question, user: other) }
 
-    it { should be_able_to :subscribe, other_question }
-    it { should_not be_able_to :unsubscribe, other_question }
-
-    it { should_not be_able_to :subscribe, question }
-    it { should be_able_to :unsubscribe, question }
+    it { should be_able_to :create, subscription}
+    it { should be_able_to :destroy, subscription }
+    it { should_not be_able_to :destroy, create(:subscription, question: question, user: other) }
   end
 end

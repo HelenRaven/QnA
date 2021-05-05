@@ -3,6 +3,7 @@ class QuestionsController < ApplicationController
 
   before_action :authenticate_user!, except: %i[index show]
   before_action :question, only: %i[destroy edit]
+  before_action :set_subscription, only: %i[show update]
   helper_method :question
   after_action  :publish_question, only: %i[create]
 
@@ -51,14 +52,6 @@ class QuestionsController < ApplicationController
     redirect_to root_path
   end
 
-  def subscribe
-    current_user.subscriptions << question
-  end
-
-  def unsubscribe
-    current_user.subscriptions.delete(question)
-  end
-
   private
 
   def question
@@ -78,5 +71,9 @@ class QuestionsController < ApplicationController
     return if @question.errors.any?
 
     ActionCable.server.broadcast('questions', { question: @question })
+  end
+
+  def set_subscription
+    @subscription ||= current_user&.subscriptions&.find_by(question: question)
   end
 end

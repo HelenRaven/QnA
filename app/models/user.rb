@@ -11,7 +11,7 @@ class User < ApplicationRecord
   has_many :votes,      dependent: :destroy
   has_many :comments,   dependent: :destroy
   has_many :authorizations, dependent: :destroy
-  has_and_belongs_to_many :subscriptions, class_name: 'Question', dependent: :destroy
+  has_many :subscriptions, dependent: :destroy
 
   def author?(object)
     id == object.user_id
@@ -40,6 +40,6 @@ class User < ApplicationRecord
   end
 
   def subscribed?(question)
-    subscriptions.where(id: question.id).any?
+    self.subscriptions.where(question_id: question.id).any?
   end
 end
