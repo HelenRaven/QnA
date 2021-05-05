@@ -1,5 +1,4 @@
 class OauthCallbacksController < Devise::OmniauthCallbacksController
-
   def github
     sign_in_with_provider('Github')
   end

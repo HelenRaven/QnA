@@ -1,5 +1,4 @@
 class Api::V1::AnswersController < Api::V1::BaseController
-
   before_action :set_answer, only: %i[show update destroy]
 
   authorize_resource class: Answer
@@ -19,7 +18,7 @@ class Api::V1::AnswersController < Api::V1::BaseController
     if @answer.save
       render json: @answer
     else
-      render json: {errors: @answer.errors}, status: 422
+      render json: { errors: @answer.errors }, status: :unprocessable_entity
     end
   end
 
@@ -27,7 +26,7 @@ class Api::V1::AnswersController < Api::V1::BaseController
     if @answer.update(answer_params)
       render json: @answer
     else
-      render json: {errors: @answer.errors}, status: 422
+      render json: { errors: @answer.errors }, status: :unprocessable_entity
     end
   end
 
@@ -35,7 +34,7 @@ class Api::V1::AnswersController < Api::V1::BaseController
     if @answer.destroy
       render json: @answer
     else
-      render json: {errors: @answer.errors}, status: 422
+      render json: { errors: @answer.errors }, status: :unprocessable_entity
     end
   end
 
@@ -48,5 +47,4 @@ class Api::V1::AnswersController < Api::V1::BaseController
   def answer_params
     params.require(:answer).permit(:body)
   end
-
 end

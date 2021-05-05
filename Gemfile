@@ -26,6 +26,7 @@ gem 'devise', github: 'heartcombo/devise', branch: 'ca-omniauth-2'
 # gem 'image_processing', '~> 1.2'
 
 # Reduces boot times through caching; required in config/boot.rb
+gem 'active_model_serializers', '~> 0.10'
 gem 'active_storage_validations'
 gem "aws-sdk-s3", require: false
 gem 'bootsnap', '>= 1.4.4', require: false
@@ -38,16 +39,18 @@ gem 'handlebars-source', '~> 4.7', '>= 4.7.7'
 gem 'jquery-rails'
 gem 'mini_magick'
 gem 'octicons_helper'
+gem 'oj'
 gem 'omniauth'
 gem 'omniauth-github', github: 'omniauth/omniauth-github', branch: 'master'
 gem 'omniauth-rails_csrf_protection'
 gem 'omniauth-vkontakte'
 gem 'rubocop-rails', require: false
+gem 'sidekiq'
+gem 'sinatra', require: false
 gem 'slim-rails'
 gem 'validate_url'
+gem 'whenever', require: false
 gem 'with_model'
-gem 'active_model_serializers', '~> 0.10'
-gem 'oj'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
