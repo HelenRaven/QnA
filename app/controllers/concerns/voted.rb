@@ -28,7 +28,7 @@ module Voted
   end
 
   def render_json_with_rating(object)
-    render json: { id: object.id, rating: object.rating, voted: current_user&.voted?(object) }
+    render json: { id: object.id, rating: object.rating, voted: current_user&.voted?(object), klass: object.class.to_s.downcase }
   end
 
   def model_klass

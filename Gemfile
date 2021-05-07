@@ -38,6 +38,7 @@ gem "google-cloud-storage", "~> 1.11", require: false
 gem 'handlebars-source', '~> 4.7', '>= 4.7.7'
 gem 'jquery-rails'
 gem 'mini_magick'
+gem 'mysql2', '~> 0.4'
 gem 'octicons_helper'
 gem 'oj'
 gem 'omniauth'
@@ -48,6 +49,7 @@ gem 'rubocop-rails', require: false
 gem 'sidekiq'
 gem 'sinatra', require: false
 gem 'slim-rails'
+gem 'thinking-sphinx'
 gem 'validate_url'
 gem 'whenever', require: false
 gem 'with_model'
@@ -77,6 +79,7 @@ group :test do
   gem 'capybara', '>= 3.26'
   gem 'selenium-webdriver'
   # Easy installation and use of web drivers to run system tests with browsers
+  gem 'database_cleaner-active_record'
   gem 'launchy'
   gem 'rails-controller-testing'
   gem 'shoulda-matchers'

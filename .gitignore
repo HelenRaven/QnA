@@ -39,3 +39,5 @@ yarn-debug.log*
 
 .env
 zinc-silicon-306309-8c40f56cd9ad.json
+config/*.sphinx.conf
+db/sphinx
