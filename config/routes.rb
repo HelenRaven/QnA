@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   devise_for :users, controllers: { omniauth_callbacks: 'oauth_callbacks', registrations: 'oauth_registrations'}
 
   root to: "questions#index"
+  get :search, to: 'search#search'
 
   namespace :api do
     namespace :v1 do
@@ -25,6 +26,7 @@ Rails.application.routes.draw do
   resources :attachments, only: %i[destroy]
   resources :links,       only: %i[destroy]
   resources :awards,      only: %i[index destroy]
+
 
   concern :votable do
     member do
