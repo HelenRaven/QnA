@@ -2,4 +2,5 @@ $('.question-errors').html("<%= render 'shared/errors', resource: question %>")
 
 <% if !question.errors.present? %>
   $('.questions').html('<%= j render @questions %>')
+  $('.question').html('<%= j render partial: 'questions/question_full', question: @question %>')
 <%end%>

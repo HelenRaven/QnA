@@ -1,0 +1,35 @@
+    .card.mb-2
+      .card-header.text-right
+          small.text-muted
+            ' asked:
+            =' question.created_at.to_date
+            =' question.user.email
+      .row.g-0
+        .col-md-2
+          = render 'shared/vote', resource: question
+
+        .col-md-10
+          .card-body
+            h5.card-title
+              b.text-info =' question.title
+
+            .card-text
+              = question.body
+            .card-text.text-right
+              = render partial: 'questions/form', locals: { question: question }
+            .card-text.text-right
+              div class = "attachments-#{question.id}"
+                = render partial: 'attachments/attachments', locals: { resource: question }
+            .card-text.text-right
+              div class = "links-#{question.id}"
+                = render partial: 'links/links', locals: { resource: question}
+            .card-text.text-left
+              = render partial: 'comments/comments', locals: { resource: question}
+
+      .card-footer.text-left
+          small.text-muted
+            - if can? :edit, question
+              =' link_to 'Edit', '#', class: 'edit-question-link', data: { question_id: question.id}
+              =' link_to 'Delete', question_path(question), method: :delete
+            -if can? :create, Subscription
+              = render 'subscriptions/subscription', question: question

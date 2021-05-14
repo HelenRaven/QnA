@@ -69,7 +69,6 @@ feature 'User can create question', "
 
       Capybara.using_session('guest') do
         expect(page).to have_content 'Test question'
-        expect(page).to_not have_content 'No questions found('
       end
     end
   end

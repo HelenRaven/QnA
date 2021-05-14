@@ -1,4 +1,7 @@
-$('.comments-' + '<%= @commentable.id%>').append('<%= @comment.body %>')
+$('.comments-' + '<%= @commentable.id%>').append('<blockquote class="blockquote mb-0"><small>' + '<%= @comment.body %>' +
+                                                 '</small></blockquote><footer class="blockquote-footer">' +
+                                                 '<%= @comment.user.email%> <%=@comment.created_at.to_date %>' + '</footer><hr>')
+
 $('.comments-form-'+ '<%= @commentable.id%>'+' #comment_body').val('')
 $('.comments-form-'+ '<%= @commentable.id%>').addClass('d-none')
 $('.add-comment-link#'+ '<%= @commentable.id%>').removeClass('d-none')

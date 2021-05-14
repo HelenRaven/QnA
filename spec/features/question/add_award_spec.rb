@@ -19,7 +19,7 @@ feature 'User can add award to question', "
 
   scenario 'User adds award when asks question' do
     fill_in 'Award title', with: 'new award'
-    attach_file 'Image', "#{Rails.root}/spec/files/star.jpg"
+    attach_file 'Award image', "#{Rails.root}/spec/files/star.jpg"
     click_on 'Ask'
 
     visit questions_path
@@ -29,7 +29,7 @@ feature 'User can add award to question', "
 
   scenario 'User adds invalid award when asks question' do
     fill_in 'Award title', with: 'new award'
-    attach_file 'Image', "#{Rails.root}/spec/rails_helper.rb"
+    attach_file 'Award image', "#{Rails.root}/spec/rails_helper.rb"
     click_on 'Ask'
 
     expect(page).to have_content 'Award image has an invalid content type'

@@ -1,31 +1,32 @@
--if can? :edit, question
+div class = "edit-question-#{question.id} d-none"
+  p.text-left
+    -if can? :edit, question
 
-  = link_to 'Edit', '#', class: 'edit-question-link', data: { question_id: question.id}
+      div class = "award-#{question.id}"
+        = render partial: 'awards/awards', locals: {question: question }
 
-  div class = "award-#{question.id} d-none"
-    = render partial: 'awards/awards', locals: {question: question }
+      div class = "attachments-#{question.id}"
+        = render partial: 'attachments/attachments', locals: { resource: question }
 
-  div class = "attachments-#{question.id} d-none"
-    = render partial: 'attachments/attachments', locals: { resource: question }
+      div class = "links-#{question.id}"
+        = render partial: 'links/links', locals: { resource: question }
 
-  div class = "links-#{question.id} d-none"
-    = render partial: 'links/links', locals: { resource: question }
+      = form_with model: question, local: false, html: {id: "edit-question-#{question.id}"} do |f|
+        .mb-3.row
+          = f.label :title, class: "col-sm-2 col-form-label"
+          .col-sm-10
+            = f.text_field :title, class: "form-control"
+        .mb-3.row
+          = f.label :body, 'Question', class: 'col-sm-2 col-form-label'
+          .col-sm-10
+            = f.text_area :body, class: "form-control"
+        .mb-3.row.input-group
+          = f.label :files, class: "col-sm-2 col-form-label"
+          .col-sm-10
+            = f.file_field :files, multiple: true,  class: "input-group-text"
 
-  = form_with model: question, local: false, class: 'd-none', html: {id: "edit-question-#{question.id}"} do |f|
-    p
-      = f.label :title, 'Title'
-      = f.text_field :title
-    p
-      = f.label :body, 'Your question'
-      = f.text_area :body
-    p
-      = f.label :files
-      = f.file_field :files, multiple: true
-    p
-    #links
-      .actions
-        = link_to_add_association 'add link', f, :links, partial: 'links/link_fields'
+        #links
+          .actions
+            = link_to_add_association 'add link', f, :links, partial: 'links/link_fields'
 
-    p= f.submit 'Save'
-
-  = link_to 'Delete question', question_path(question), method: :delete
+        = f.submit 'Save'
