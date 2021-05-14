@@ -1,4 +1,6 @@
-= form_with url: search_path, class: 'form-search form-inline', method: :get do |form|
-    = form.text_field :query, placeholder: 'Search...', class: 'input-large search-query'
-    = form.select :resource, ['all', 'question', 'answer', 'comment', 'user']
-    = form.submit 'Find it!', class: 'btn btn-info'
+  .container-fluid
+    .d-flex
+      = form_with url: search_path, class: 'd-flex', method: :get do |form|
+          = form.text_field :query, placeholder: 'Search...', class: 'form-control me-3', type: "search"
+          = form.select :resource, ['all', 'question', 'answer', 'comment', 'user']
+          = form.submit 'Find it!', class: "btn btn-outline-success", type: "submit"

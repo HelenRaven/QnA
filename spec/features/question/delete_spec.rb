@@ -11,7 +11,7 @@ feature 'Author can delete his question', "
   scenario 'Authenticated author try to delete his question' do
     sign_in(question.user)
     visit question_path(question)
-    click_on 'Delete question'
+    click_on 'Delete'
 
     expect(page).to_not have_content question.title
     expect(page).to_not have_content question.body
@@ -21,12 +21,12 @@ feature 'Author can delete his question', "
     sign_in(user)
     visit question_path(question)
 
-    expect(page).to_not have_link 'Delete question'
+    expect(page).to_not have_link 'Delete'
   end
 
   scenario 'Unauthenticated user try to delete question' do
     visit question_path(question)
 
-    expect(page).to_not have_link 'Delete question'
+    expect(page).to_not have_link 'Delete'
   end
 end

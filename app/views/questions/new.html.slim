@@ -1,30 +1,39 @@
 = render 'shared/errors', resource: question
 
-= form_with model: question do |f|
-  p
-    = f.label :title
-    = f.text_field :title
-  p
-    = f.label :body
-    = f.text_area :body
-  p
-    = f.label :files
-    = f.file_field :files, multiple: true
+h2.text-info
+  | New Question:
 
-  p Links:
+= form_with model: question do |f|
+  .mb-3.row
+    = f.label :title, class: "col-sm-2 col-form-label"
+    .col-sm-10
+      = f.text_field :title, class: "form-control"
+  .mb-3.row
+    = f.label :body, class: "col-sm-2 col-form-label"
+    .col-sm-10
+      = f.text_area :body, class: "form-control"
+  .mb-3.row.input-group
+    = f.label :files, class: "col-sm-2 col-form-label"
+    .col-sm-10
+      = f.file_field :files, multiple: true,  class: "input-group-text"
+
   #links
     = f.fields_for :links do |link|
       = render 'links/link_fields', f: link
     .actions
       = link_to_add_association 'add link', f, :links, partial: 'links/link_fields'
-
+  p
+    h5.text-info
+      | Add award for best answer:
   p
     = f.fields_for :award do |a|
-      p
-        = a.label :title, 'Award title'
-        = a.text_field :title
-      p
-        = a.label :image
-        = a.file_field :image
+      .mb-3.row
+        = a.label :title, 'Award title', class: "col-sm-2 col-form-label"
+        .col-sm-10
+          = a.text_field :title, class: "form-control"
+      .mb-3.row.input-group
+        = a.label :image, 'Award image', class: "col-sm-2 col-form-label"
+        .col-sm-10
+          = a.file_field :image,  class: "input-group-text"
 
   p= f.submit 'Ask'

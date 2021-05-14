@@ -1,6 +1,29 @@
 div class = "question-#{question.id}"
+  .card.mb-2
+    .row.g-0
+      .col-md-10
+        .card-body
+          h5.card-title
+            = link_to question.title, question_path(question)
+          .card-text
+            = question.body
+          .card-text.text-right
+            = render partial: 'questions/form', locals: { question: question }
+      .col-md-2
+        p
+          ' Rating
+          span.badge.bg-success.text-white
+            = question.rating
+        p
+          ' Answers
+          span.badge.bg-warning.text-white
+            = question.answers.size
+        div
+          -if can? :edit, question
+            ='link_to 'Edit', '#', class: 'edit-question-link', data: { question_id: question.id}
+            ='link_to 'Delete', question_path(question), method: :delete
 
-  .collection-item
-    pre = link_to question.title, question_path(question)
-
-  = render partial: 'questions/form', locals: { question: question }
+    .card-footer
+      small.text-muted
+        =' question.created_at.to_date
+        =' question.user.email

@@ -23,7 +23,7 @@ feature 'User can edit his question', "
 
       within('.questions') do
         fill_in 'Title', with: 'new title'
-        fill_in 'Your question', with: 'edited question'
+        fill_in 'Question', with: 'edited question'
         click_on 'Save'
 
         expect(page).to_not have_content question.title
@@ -35,11 +35,10 @@ feature 'User can edit his question', "
     scenario 'edits his question with errors' do
       click_on 'Edit'
       within('.questions') do
-        fill_in 'Your question', with: ''
+        fill_in 'Question', with: ''
         click_on 'Save'
 
         expect(page).to have_content question.body
-        expect(page).to have_selector 'textarea'
       end
       within('.question-errors') do
         expect(page).to have_content "Body can't be blank"

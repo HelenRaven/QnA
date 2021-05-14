@@ -1,7 +1,10 @@
 - if can? :create, Comment
-  = link_to 'Add comment', '#', class: 'add-comment-link', id: commentable.id, data: { commentable_id: commentable.id}
+  small
+    = link_to 'Add comment', '#', class: 'add-comment-link', id: commentable.id, data: { commentable_id: commentable.id}
   div class = "comments-form-#{commentable.id} d-none"
     = form_for [commentable, Comment.new], remote: true, html: {id: "add-comment-#{commentable.id}"} do |f|
-      = f.label :body
-      = f.text_area :body, class: "form-control"
+      .mb-3.row
+        = f.label :body, class: "col-sm-2 col-form-label"
+        .col-sm-10
+          = f.text_area :body, class: "form-control"
       = f.submit 'Create comment'

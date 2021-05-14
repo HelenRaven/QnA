@@ -1,23 +1,6 @@
--if can? :destroy, @question
-  = link_to 'Delete question', question_path(@question), method: :delete
-
-h1= @question.title
-p= @question.body
-
-= render 'shared/vote', resource: @question
-
-.subscription
-  -if can? :create, Subscription
-    = render 'subscriptions/subscription', question: @question
-
-div class = "attachments-#{@question.id}"
-  = render partial: 'attachments/attachments', locals: { resource: @question }
-
-div class = "links-#{@question.id}"
-  = render partial: 'links/links', locals: { resource: @question}
-
-div class = "comments-#{@question.id}"
-  = render partial: 'comments/comments', locals: { resource: @question}
+p
+  .question
+    = render partial: 'questions/question_full', question: @question
 
 .answers
   -if @question.best_answer
@@ -27,13 +10,18 @@ div class = "comments-#{@question.id}"
 .answer-errors
   = render 'shared/errors', resource: @new_answer
 
+h5.text-info
+  | Create your answer:
+
 = form_with model: [@question, @new_answer], local: false, class: 'new-answer', data:{ type: :json } do |f|
-  p
-    = f.label :body, 'Your answer'
-    = f.text_area :body
-  p
-    = f.label :files
-    = f.file_field :files, multiple: true
+  .mb-3.row
+    = f.label :body, 'Your answer', class: "col-sm-2 col-form-label"
+    .col-sm-10
+      = f.text_area :body, class: "form-control"
+  .mb-3.row.input-group
+    = f.label :files, class: "col-sm-2 col-form-label"
+    .col-sm-10
+      = f.file_field :files, multiple: true, class: "input-group-text"
 
   p
   #links
@@ -41,4 +29,4 @@ div class = "comments-#{@question.id}"
     .actions
       = link_to_add_association 'add link', f, :links, partial: 'links/link_fields'
 
-  p= f.submit 'Post answer'
+  = f.submit 'Post answer'
