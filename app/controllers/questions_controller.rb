@@ -72,7 +72,8 @@ class QuestionsController < ApplicationController
   def publish_question
     return if @question.errors.any?
 
-    ActionCable.server.broadcast('questions', { question: @question, created: @question.created_at.to_date, user: @question.user.email })
+    ActionCable.server.broadcast('questions',
+                                 { question: @question, created: @question.created_at.to_date, user: @question.user.email })
   end
 
   def set_subscription
