@@ -9,9 +9,6 @@ set :repo_url, "git@github.com:HelenRaven/QnA.git"
 set :deploy_to, "/home/deploy/qna"
 set :deploy_user, "deploy"
 
-set :rvm_type, :deploy_user
-set :rvm_ruby_version, '2.7.0'
-
 # Default value for :linked_files is []
 append :linked_files, "config/database.yml", "config/master.key"
 
