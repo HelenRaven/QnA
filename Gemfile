@@ -46,7 +46,7 @@ gem 'omniauth-github', github: 'omniauth/omniauth-github', branch: 'master'
 gem 'omniauth-rails_csrf_protection'
 gem 'omniauth-vkontakte'
 gem 'rubocop-rails', require: false
-gem 'sidekiq'
+gem 'sidekiq', ' < 6'
 gem 'sinatra', require: false
 gem 'slim-rails'
 gem 'thinking-sphinx'
