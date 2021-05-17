@@ -29,7 +29,7 @@
       .card-footer.text-left
           small.text-muted
             - if can? :edit, question
-              =' link_to 'Edit', '#', class: 'edit-question-link', data: { question_id: question.id}
-              =' link_to 'Delete', question_path(question), method: :delete
+              = link_to 'Edit', '#', class: 'edit-question-link', data: { question_id: question.id}
+              = link_to 'Delete', question_path(question), method: :delete
             -if can? :create, Subscription
               = render 'subscriptions/subscription', question: question

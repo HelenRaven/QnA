@@ -4,8 +4,8 @@ div class = "answer-#{best_answer.id}"
       .card-header.text-right
           small.text-muted
             ' answered:
-            =' best_answer.created_at.to_date
-            =' best_answer.user.email
+            = best_answer.created_at.to_date
+            = best_answer.user.email
       .row.g-0
         .col-md-2
           .bg-warning
@@ -15,10 +15,10 @@ div class = "answer-#{best_answer.id}"
         .col-md-10
           .card-body
             .card-title
-              =' best_answer.body
+              = best_answer.body
 
             .card-text.text-right
-              =' render partial:'answers/form', locals: {answer: best_answer}
+              = render partial:'answers/form', locals: {answer: best_answer}
             .card-text.text-right
               div class = "attachments-#{best_answer.id}"
                 = render partial: 'attachments/attachments', locals: {resource: best_answer}
@@ -31,5 +31,5 @@ div class = "answer-#{best_answer.id}"
       .card-footer.text-left
           small.text-muted
             -if can? :edit, best_answer
-              =' link_to 'Edit', '#', class: 'edit-answer-link', data: { answer_id: best_answer.id}
-              =' link_to 'Delete answer', answer_path(best_answer), remote: true, method: :delete
+              = link_to 'Edit', '#', class: 'edit-answer-link', data: { answer_id: best_answer.id}
+              = link_to 'Delete answer', answer_path(best_answer), remote: true, method: :delete

@@ -14,7 +14,7 @@ class AnswersController < ApplicationController
     @answer = current_user.answers.new(answer_params)
     @answer.question = question
     attach_files(@answer)
-    @answer.save
+    SubscriptionsJob.perform_later(@answer) if @answer.save
   end
 
   def update

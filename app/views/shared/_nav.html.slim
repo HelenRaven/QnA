@@ -1,14 +1,14 @@
 nav.navbar.navbar-light.navbar-expand-lg style="background-color: #0dcaf0"
   .container-fluid
-    =' link_to 'Q&A', root_path, class: 'navbar-brand'
+    = link_to 'Questions&Answers', root_path, class: 'navbar-brand'
 
     -if user_signed_in?
-      =' link_to 'Awards', awards_path, class: 'navbar-text'
+      = link_to 'Awards', awards_path, class: 'navbar-text'
 
     = render 'search/form'
 
     -if user_signed_in?
       b= current_user.email
-      =' button_to 'Log out', destroy_user_session_path , method: :delete, class: "btn btn-outline-success", type: "submit"
+      = button_to 'Log out', destroy_user_session_path , method: :delete, class: "btn btn-outline-success", type: "submit"
     -else
-      =' button_to 'Log_in ', new_user_session_path, class: "btn btn-outline-success"
+      = button_to 'Log_in ', new_user_session_path, class: "btn btn-outline-success"

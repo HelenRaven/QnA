@@ -7,8 +7,8 @@ div class = "comments-#{resource.id} text-right"
           small
             = comment.body
         footer.blockquote-footer
-          ='' comment.user.email
-          ='' comment.created_at.to_date
+          = comment.user.email
+          = comment.created_at.to_date
         hr
 
 = render partial: 'comments/form', locals: { commentable: resource }

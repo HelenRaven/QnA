@@ -19,7 +19,7 @@ div class = "answer-#{answer.id}"
               =' answer.body
 
             .card-text.text-right
-              =' render partial:'answers/form', locals: {answer: answer}
+              = render partial:'answers/form', locals: {answer: answer}
             .card-text.text-right
               div class = "attachments-#{answer.id}"
                 = render partial: 'attachments/attachments', locals: {resource: answer}
@@ -32,7 +32,7 @@ div class = "answer-#{answer.id}"
       .card-footer.text-left
           small.text-muted
             -if can? :edit, answer
-              =' link_to 'Edit', '#', class: 'edit-answer-link', data: { answer_id: answer.id}
-              =' link_to 'Delete answer', answer_path(answer), remote: true, method: :delete
+              = link_to 'Edit', '#', class: 'edit-answer-link', data: { answer_id: answer.id}
+              = link_to 'Delete answer', answer_path(answer), remote: true, method: :delete
 
 
