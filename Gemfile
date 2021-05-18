@@ -46,7 +46,7 @@ gem 'omniauth-github', github: 'omniauth/omniauth-github', branch: 'master'
 gem 'omniauth-rails_csrf_protection'
 gem 'omniauth-vkontakte'
 gem 'rubocop-rails', require: false
-gem 'sidekiq', ' < 6'
+gem 'sidekiq'
 gem 'sinatra', require: false
 gem 'slim-rails'
 gem 'thinking-sphinx'
@@ -56,6 +56,7 @@ gem 'with_model'
 gem 'ed25519', '>= 1.2', '< 2.0'
 gem 'bcrypt_pbkdf', '>= 1.0', '< 2.0'
 gem 'mimemagic', '~> 0.4.3'
+gem 'unicorn'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -81,6 +82,7 @@ group :development do
   gem 'capistrano-rvm', require: false
   gem 'capistrano-passenger', require: false
   gem 'capistrano-sidekiq', require: false
+  gem 'capistrano3-unicorn', require: false
 end
 
 group :test do
