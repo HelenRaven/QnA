@@ -21,3 +21,5 @@ set :ssh_options, {
   auth_methods: %w(publickey password),
   port: 2223
 }
+
+set :pty,  false
