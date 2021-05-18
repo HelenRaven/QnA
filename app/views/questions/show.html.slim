@@ -27,6 +27,6 @@ h5.text-info
   #links
     = f.fields_for :links do |link|
     .actions
-      = link_to_add_association 'add link', f, :links, partial: 'links/link_fields'
+      => link_to_add_association 'add link', f, :links, partial: 'links/link_fields'
 
   = f.submit 'Post answer'

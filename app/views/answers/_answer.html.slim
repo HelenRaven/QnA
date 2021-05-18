@@ -4,19 +4,19 @@ div class = "answer-#{answer.id}"
       .card-header.text-right
           small.text-muted
             ' answered:
-            =' answer.created_at.to_date
-            =' answer.user.email
+            => answer.created_at.to_date
+            => answer.user.email
       .row.g-0
         .col-md-2
           = render 'shared/vote', resource: answer
           -if can? :best, answer
             .text-center
-              = link_to 'Choose', best_answer_path(answer), remote: true, method: :patch
+              => link_to 'Choose', best_answer_path(answer), remote: true, method: :patch
 
         .col-md-10
           .card-body
             .card-title
-              =' answer.body
+              => answer.body
 
             .card-text.text-right
               = render partial:'answers/form', locals: {answer: answer}
@@ -32,7 +32,7 @@ div class = "answer-#{answer.id}"
       .card-footer.text-left
           small.text-muted
             -if can? :edit, answer
-              = link_to 'Edit', '#', class: 'edit-answer-link', data: { answer_id: answer.id}
-              = link_to 'Delete answer', answer_path(answer), remote: true, method: :delete
+              => link_to 'Edit', '#', class: 'edit-answer-link', data: { answer_id: answer.id}
+              => link_to 'Delete answer', answer_path(answer), remote: true, method: :delete
 
 

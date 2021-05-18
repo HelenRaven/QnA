@@ -27,6 +27,6 @@ div class = "edit-question-#{question.id} d-none"
 
         #links
           .actions
-            = link_to_add_association 'add link', f, :links, partial: 'links/link_fields'
+            => link_to_add_association 'add link', f, :links, partial: 'links/link_fields'
 
         = f.submit 'Save'
