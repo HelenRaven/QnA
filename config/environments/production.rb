@@ -17,7 +17,7 @@ Rails.application.configure do
   config.action_controller.perform_caching = true
   config.cache_store = :redis_cache_store, {url: 'redis://localhost:6379/0/cache', expires_in: 90.minutes}
 
-  config.action_cable.allowed_request_origins = ["188.166.43.135"]
+  config.action_cable.allowed_request_origins  = ["188.166.43.135"]
 
   # Ensures that a master key has been made available in either ENV["RAILS_MASTER_KEY"]
   # or in config/master.key. This key is used to decrypt credentials (and other encrypted files).
