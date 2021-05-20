@@ -15,6 +15,9 @@ Rails.application.configure do
   # Full error reports are disabled and caching is turned on.
   config.consider_all_requests_local       = false
   config.action_controller.perform_caching = true
+  config.cache_store = :redis_cache_store, {url: 'redis://localhost:6379/0/cache', expires_in: 90.minutes}
+
+  config.action_cable.allower_request_origins = ["188.166.43.135"]
 
   # Ensures that a master key has been made available in either ENV["RAILS_MASTER_KEY"]
   # or in config/master.key. This key is used to decrypt credentials (and other encrypted files).
@@ -63,7 +66,6 @@ Rails.application.configure do
   # config.active_job.queue_name_prefix = "qna_production"
 
   config.action_mailer.perform_caching = false
-
   config.action_mailer.default_url_options = { host: 'http://188.166.43.135/'}
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
