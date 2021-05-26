@@ -29,14 +29,17 @@ gem 'devise', github: 'heartcombo/devise', branch: 'ca-omniauth-2'
 gem 'active_model_serializers', '~> 0.10'
 gem 'active_storage_validations'
 gem "aws-sdk-s3", require: false
+gem 'bcrypt_pbkdf', '>= 1.0', '< 2.0'
 gem 'bootsnap', '>= 1.4.4', require: false
 gem 'cancancan'
 gem 'cocoon'
 gem 'doorkeeper'
+gem 'ed25519', '>= 1.2', '< 2.0'
 gem 'gon'
 gem "google-cloud-storage", "~> 1.11", require: false
 gem 'handlebars-source', '~> 4.7', '>= 4.7.7'
 gem 'jquery-rails'
+gem 'mimemagic', '~> 0.4.3'
 gem 'mini_magick'
 gem 'mysql2', '~> 0.4'
 gem 'octicons_helper'
@@ -45,19 +48,16 @@ gem 'omniauth'
 gem 'omniauth-github', github: 'omniauth/omniauth-github', branch: 'master'
 gem 'omniauth-rails_csrf_protection'
 gem 'omniauth-vkontakte'
+gem 'redis-rails'
 gem 'rubocop-rails', require: false
 gem 'sidekiq', '< 6'
 gem 'sinatra', require: false
 gem 'slim-rails'
 gem 'thinking-sphinx'
+gem 'unicorn'
 gem 'validate_url'
 gem 'whenever', require: false
 gem 'with_model'
-gem 'ed25519', '>= 1.2', '< 2.0'
-gem 'bcrypt_pbkdf', '>= 1.0', '< 2.0'
-gem 'mimemagic', '~> 0.4.3'
-gem 'unicorn'
-gem 'redis-rails'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -75,15 +75,15 @@ group :development do
   gem 'listen', '~> 3.3'
   gem 'rack-mini-profiler', '~> 2.0'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'spring'
-  gem 'letter_opener'
   gem 'capistrano', require: false
+  gem 'capistrano3-unicorn', require: false
   gem 'capistrano-bundler', require: false
+  gem 'capistrano-passenger', require: false
   gem 'capistrano-rails', require: false
   gem 'capistrano-rvm', require: false
-  gem 'capistrano-passenger', require: false
   gem 'capistrano-sidekiq', require: false
-  gem 'capistrano3-unicorn', require: false
+  gem 'letter_opener'
+  gem 'spring'
 end
 
 group :test do
