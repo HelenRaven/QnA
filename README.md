@@ -1,24 +1,19 @@
-# README
+# Questions and answers service
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Stackoverflow-like application.
 
-Things you may want to cover:
+Technoligies used:
 
-* Ruby version
+* TDD/BDD (RSpec, Capybara)
 
-* System dependencies
+* ActionCable
 
-* Configuration
+* ActiveJob, Sidekiq
 
-* Database creation
+* OAuth
 
-* Database initialization
+* CanCanCan
 
-* How to run the test suite
+* SphinxSearch
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Application is deployed on the server, available at http://188.166.43.135
