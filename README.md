@@ -2,7 +2,7 @@
 
 Stackoverflow-like application.
 
-Technoligies used:
+Technologies used:
 
 * TDD/BDD (RSpec, Capybara)
 
